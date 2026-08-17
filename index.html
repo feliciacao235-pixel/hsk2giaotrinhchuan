@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Web App học HSK2 theo Giáo trình Chuẩn HSK2, data-driven, có luyện tập và nộp bài qua Telegram." />
+  <title>HSK2 NABI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">汉</div>
+        <div>
+          <strong>HSK2 NABI</strong>
+          <span>Giáo trình chuẩn HSK2</span>
+        </div>
+      </div>
+      <nav id="lessonNav" class="lesson-nav" aria-label="Danh sách bài học"></nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="menuBtn" class="icon-btn mobile-only" type="button" aria-label="Mở danh sách bài">☰</button>
+        <div>
+          <p id="crumb" class="crumb">Bài 1</p>
+          <h1 id="lessonTitle">九月去北京旅游最好</h1>
+        </div>
+        <button id="shufflePracticeBtn" class="secondary-btn" type="button">Random luyện tập</button>
+      </header>
+
+      <section id="lockedNotice" class="notice hidden">
+        Bài này đang chờ bổ sung dữ liệu. Khi có file dữ liệu đúng template, giao diện sẽ dùng lại cấu trúc hiện tại.
+      </section>
+
+      <section id="lessonHero" class="lesson-hero"></section>
+
+      <div class="tabs" role="tablist" aria-label="Mục học">
+        <button class="tab active" data-tab="vocab" type="button">Từ mới</button>
+        <button class="tab" data-tab="grammar" type="button">Ngữ pháp</button>
+        <button class="tab" data-tab="practice" type="button">Luyện tập</button>
+        <button class="tab" data-tab="homework" type="button">Bài tập</button>
+      </div>
+
+      <section id="tabContent" class="tab-content"></section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script src="data/lesson01.js"></script>
+  <script src="data/lesson02.js"></script>
+  <script src="data/lesson03.js"></script>
+  <script src="data/lesson04.js"></script>
+  <script src="data/lesson05.js"></script>
+  <script src="data/lesson06.js"></script>
+  <script src="data/lesson07.js"></script>
+  <script src="data/lesson08.js"></script>
+  <script src="data/lesson09.js"></script>
+  <script src="data/lesson10.js"></script>
+  <script src="data/lesson11.js"></script>
+  <script src="data/lesson12.js"></script>
+  <script src="data/lesson13.js"></script>
+  <script src="data/lesson14.js"></script>
+  <script src="data/lesson15.js"></script>
+  <script src="data/review01.js"></script>
+  <script src="data/review02.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
