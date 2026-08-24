@@ -1,107 +1,745 @@
-(function () {
-  const lesson = {
-    id: "lesson14",
-    order: 14,
-    type: "lesson",
-    status: "ready",
-    title: "你看过那个电影吗？",
-    viTitle: "Bạn đã từng xem bộ phim đó chưa?",
-    scope: "Bài 14",
-    sourceRange: "HSK2.md: sách giáo trình Bài 14; chưa thấy phần sách bài tập Bài 14 trong file nguồn hiện tại",
-    vocabulary: [
-      { hanzi: "意思", pinyin: "yìsi", pos: "Danh từ", meaning: "Ý nghĩa", example: "这个字是什么意思？", examplePinyin: "Zhège zì shì shénme yìsi?", exampleVi: "Chữ này có nghĩa là gì?", source: "book", exampleSource: "ai" },
-      { hanzi: "但是", pinyin: "dànshì", pos: "Liên từ", meaning: "Nhưng", example: "虽然汉字很难，但是我很喜欢写汉字。", examplePinyin: "Suīrán Hànzì hěn nán, dànshì wǒ hěn xǐhuan xiě Hànzì.", exampleVi: "Tuy chữ Hán khó, nhưng tôi rất thích viết chữ Hán.", source: "book", exampleSource: "book" },
-      { hanzi: "虽然", pinyin: "suīrán", pos: "Liên từ", meaning: "Tuy, mặc dù", example: "虽然外面很冷，但是房间里很热。", examplePinyin: "Suīrán wàimian hěn lěng, dànshì fángjiān li hěn rè.", exampleVi: "Tuy bên ngoài lạnh, nhưng trong phòng rất nóng.", source: "book", exampleSource: "book" },
-      { hanzi: "次", pinyin: "cì", pos: "Lượng từ", meaning: "Lần", example: "我看过这个电影两次。", examplePinyin: "Wǒ kàn guo zhège diànyǐng liǎng cì.", exampleVi: "Tôi từng xem bộ phim này hai lần.", source: "book", exampleSource: "ai" },
-      { hanzi: "玩儿", pinyin: "wánr", pos: "Động từ", meaning: "Chơi", example: "周末我们一起去玩儿吧。", examplePinyin: "Zhōumò wǒmen yìqǐ qù wánr ba.", exampleVi: "Cuối tuần chúng ta cùng đi chơi nhé.", source: "book", exampleSource: "ai" },
-      { hanzi: "晴", pinyin: "qíng", pos: "Tính từ", meaning: "Nắng, trời quang", example: "虽然是晴天，但是很冷。", examplePinyin: "Suīrán shì qíngtiān, dànshì hěn lěng.", exampleVi: "Tuy là ngày nắng, nhưng rất lạnh.", source: "book", exampleSource: "book" },
-      { hanzi: "百", pinyin: "bǎi", pos: "Số từ", meaning: "Trăm", example: "这件衣服一百块。", examplePinyin: "Zhè jiàn yīfu yì bǎi kuài.", exampleVi: "Cái áo này một trăm tệ.", source: "book", exampleSource: "ai" }
-    ],
-    grammar: [
-      { id: "g1", title: "Trợ từ kinh nghiệm 过", structure: "Động từ + 过 + tân ngữ", explanation: "Dùng để nói đã từng có kinh nghiệm làm việc gì.", examples: [
-        { zh: "他们来过我家。", pinyin: "Tāmen lái guo wǒ jiā.", vi: "Họ từng đến nhà tôi." },
-        { zh: "我看过那个电影。", pinyin: "Wǒ kàn guo nà ge diànyǐng.", vi: "Tôi từng xem bộ phim đó." },
-        { zh: "我没看过那个电影。", pinyin: "Wǒ méi kàn guo nà ge diànyǐng.", vi: "Tôi chưa từng xem bộ phim đó." }
-      ], source: "book" },
-      { id: "g2", title: "虽然……但是……", structure: "虽然 + mệnh đề 1，但是 + mệnh đề 2", explanation: "Nói hai ý tương phản: tuy/mặc dù... nhưng...", examples: [
-        { zh: "虽然外面很冷，但是房间里很热。", pinyin: "Suīrán wàimian hěn lěng, dànshì fángjiān li hěn rè.", vi: "Tuy bên ngoài lạnh, nhưng trong phòng rất nóng." },
-        { zh: "虽然汉字很难，但是我很喜欢写汉字。", pinyin: "Suīrán Hànzì hěn nán, dànshì wǒ hěn xǐhuan xiě Hànzì.", vi: "Tuy chữ Hán khó, nhưng tôi rất thích viết chữ Hán." },
-        { zh: "虽然是晴天，但是很冷。", pinyin: "Suīrán shì qíngtiān, dànshì hěn lěng.", vi: "Tuy là ngày nắng, nhưng rất lạnh." }
-      ], source: "book" },
-      { id: "g3", title: "Lượng từ 次", structure: "Động từ (+ 过) + số + 次 + tân ngữ", explanation: "Dùng 次 để nói số lần làm việc gì.", examples: [
-        { zh: "我们去过三次北京。", pinyin: "Wǒmen qù guo sān cì Běijīng.", vi: "Chúng tôi từng đi Bắc Kinh ba lần." },
-        { zh: "我上星期去过一次医院。", pinyin: "Wǒ shàng xīngqī qù guo yí cì yīyuàn.", vi: "Tuần trước tôi từng đi bệnh viện một lần." }
-      ], source: "book" }
-    ],
-    vocabGames: {
-      fillSentences: [
-        { prompt: "这个字是什么（ ）？", answer: "意思", hint: "ý nghĩa", source: "ai" },
-        { prompt: "（ ）是晴天，但是很冷。", answer: "虽然", hint: "tuy", source: "book" },
-        { prompt: "我看过这个电影两（ ）。", answer: "次", hint: "lần", source: "ai" },
-        { prompt: "这件衣服一（ ）块。", answer: "百", hint: "trăm", source: "ai" }
+/**
+ * Data Schema for HSK2 Standard Course - Lesson 14
+ * Source: Giáo trình Chuẩn HSK 2 & Sách Bài Tập HSK 2 (migrated, official workbook answers verified)
+ */
+
+const lesson14Data = {
+  "lessonInfo": {
+    "id": 14,
+    "titleZH": "你看过那个电影吗？",
+    "titleVI": "Bạn đã từng xem bộ phim đó chưa?",
+    "audioMain": "audio/workbook/lesson-14-workbook-audio-1.mp3",
+    "audioPronunciation": "audio/workbook/lesson-14-workbook-audio-2.mp3",
+    "pronunciationAudio": "audio/workbook/lesson-14-workbook-audio-2.mp3",
+    "sourceStatus": "MIGRATED_FROM_OLD_SCHEMA"
+  },
+  "vocabulary": [
+    {
+      "id": 1,
+      "hanzi": "意思",
+      "pinyin": "yìsi",
+      "wordType": "Danh từ",
+      "meaning": "Ý nghĩa",
+      "exampleZH": "这个字是什么意思？",
+      "examplePinyin": "Zhège zì shì shénme yìsi?",
+      "exampleVI": "Chữ này có nghĩa là gì?",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 2,
+      "hanzi": "但是",
+      "pinyin": "dànshì",
+      "wordType": "Liên từ",
+      "meaning": "Nhưng",
+      "exampleZH": "虽然汉字很难，但是我很喜欢写汉字。",
+      "examplePinyin": "Suīrán Hànzì hěn nán, dànshì wǒ hěn xǐhuan xiě Hànzì.",
+      "exampleVI": "Tuy chữ Hán khó, nhưng tôi rất thích viết chữ Hán.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 3,
+      "hanzi": "虽然",
+      "pinyin": "suīrán",
+      "wordType": "Liên từ",
+      "meaning": "Tuy, mặc dù",
+      "exampleZH": "虽然外面很冷，但是房间里很热。",
+      "examplePinyin": "Suīrán wàimian hěn lěng, dànshì fángjiān li hěn rè.",
+      "exampleVI": "Tuy bên ngoài lạnh, nhưng trong phòng rất nóng.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 4,
+      "hanzi": "次",
+      "pinyin": "cì",
+      "wordType": "Lượng từ",
+      "meaning": "Lần",
+      "exampleZH": "我看过这个电影两次。",
+      "examplePinyin": "Wǒ kàn guo zhège diànyǐng liǎng cì.",
+      "exampleVI": "Tôi từng xem bộ phim này hai lần.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 5,
+      "hanzi": "玩儿",
+      "pinyin": "wánr",
+      "wordType": "Động từ",
+      "meaning": "Chơi",
+      "exampleZH": "周末我们一起去玩儿吧。",
+      "examplePinyin": "Zhōumò wǒmen yìqǐ qù wánr ba.",
+      "exampleVI": "Cuối tuần chúng ta cùng đi chơi nhé.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 6,
+      "hanzi": "晴",
+      "pinyin": "qíng",
+      "wordType": "Tính từ",
+      "meaning": "Nắng, trời quang",
+      "exampleZH": "虽然是晴天，但是很冷。",
+      "examplePinyin": "Suīrán shì qíngtiān, dànshì hěn lěng.",
+      "exampleVI": "Tuy là ngày nắng, nhưng rất lạnh.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 7,
+      "hanzi": "百",
+      "pinyin": "bǎi",
+      "wordType": "Số từ",
+      "meaning": "Trăm",
+      "exampleZH": "这件衣服一百块。",
+      "examplePinyin": "Zhè jiàn yīfu yì bǎi kuài.",
+      "exampleVI": "Cái áo này một trăm tệ.",
+      "sourceStatus": "VERIFIED"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g1",
+      "name": "Trợ từ kinh nghiệm 过",
+      "formula": "Động từ + 过 + tân ngữ",
+      "explanation": "Dùng để nói đã từng có kinh nghiệm làm việc gì.",
+      "examples": [
+        {
+          "zh": "他们来过我家。",
+          "pinyin": "Tāmen lái guo wǒ jiā.",
+          "vi": "Họ từng đến nhà tôi."
+        },
+        {
+          "zh": "我看过那个电影。",
+          "pinyin": "Wǒ kàn guo nà ge diànyǐng.",
+          "vi": "Tôi từng xem bộ phim đó."
+        },
+        {
+          "zh": "我没看过那个电影。",
+          "pinyin": "Wǒ méi kàn guo nà ge diànyǐng.",
+          "vi": "Tôi chưa từng xem bộ phim đó."
+        }
       ],
-      listeningChoice: [
-        { script: "意思", prompt: "Nghe và chọn từ đúng", answer: "意思", options: ["意思", "虽然", "但是", "次"], source: "ai" },
-        { script: "晴天", prompt: "Nghe và chọn từ đúng", answer: "晴天", options: ["晴天", "玩儿", "百", "电影"], source: "ai" },
-        { script: "但是", prompt: "Nghe và chọn từ đúng", answer: "但是", options: ["但是", "虽然", "过", "意思"], source: "ai" }
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "Chọn câu hỏi kinh nghiệm đúng.",
+        "options": [
+          "你看过那个电影吗？",
+          "你看那个电影过吗？",
+          "你过看那个电影吗？"
+        ],
+        "answer": "你看过那个电影吗？",
+        "explanation": "过 đứng sau động từ 看."
+      }
+    },
+    {
+      "id": "g2",
+      "name": "虽然……但是……",
+      "formula": "虽然 + mệnh đề 1，但是 + mệnh đề 2",
+      "explanation": "Nói hai ý tương phản: tuy/mặc dù... nhưng...",
+      "examples": [
+        {
+          "zh": "虽然外面很冷，但是房间里很热。",
+          "pinyin": "Suīrán wàimian hěn lěng, dànshì fángjiān li hěn rè.",
+          "vi": "Tuy bên ngoài lạnh, nhưng trong phòng rất nóng."
+        },
+        {
+          "zh": "虽然汉字很难，但是我很喜欢写汉字。",
+          "pinyin": "Suīrán Hànzì hěn nán, dànshì wǒ hěn xǐhuan xiě Hànzì.",
+          "vi": "Tuy chữ Hán khó, nhưng tôi rất thích viết chữ Hán."
+        },
+        {
+          "zh": "虽然是晴天，但是很冷。",
+          "pinyin": "Suīrán shì qíngtiān, dànshì hěn lěng.",
+          "vi": "Tuy là ngày nắng, nhưng rất lạnh."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "（ ）外面很冷，但是房间里很热。",
+        "options": [],
+        "answer": "虽然",
+        "explanation": "虽然 mở đầu vế nhượng bộ."
+      }
+    },
+    {
+      "id": "g3",
+      "name": "Lượng từ 次",
+      "formula": "Động từ (+ 过) + số + 次 + tân ngữ",
+      "explanation": "Dùng 次 để nói số lần làm việc gì.",
+      "examples": [
+        {
+          "zh": "我们去过三次北京。",
+          "pinyin": "Wǒmen qù guo sān cì Běijīng.",
+          "vi": "Chúng tôi từng đi Bắc Kinh ba lần."
+        },
+        {
+          "zh": "我上星期去过一次医院。",
+          "pinyin": "Wǒ shàng xīngqī qù guo yí cì yīyuàn.",
+          "vi": "Tuần trước tôi từng đi bệnh viện một lần."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "我去过三（ ）北京。",
+        "options": [],
+        "answer": "次",
+        "explanation": "次 chỉ số lần."
+      }
+    }
+  ],
+  "vocabularyGames": {
+    "quizQuestions": [
+      {
+        "id": "q1",
+        "type": "hanzi-to-meaning",
+        "prompt": "意思",
+        "options": [
+          "Ý nghĩa",
+          "Nhưng",
+          "Tuy, mặc dù",
+          "Lần"
+        ],
+        "answer": "Ý nghĩa",
+        "pinyin": "yìsi",
+        "meaning": "Ý nghĩa",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q2",
+        "type": "meaning-to-hanzi",
+        "prompt": "Nhưng",
+        "options": [
+          "意思",
+          "但是",
+          "虽然",
+          "次"
+        ],
+        "answer": "但是",
+        "pinyin": "dànshì",
+        "meaning": "Nhưng",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q3",
+        "type": "hanzi-to-meaning",
+        "prompt": "虽然",
+        "options": [
+          "Ý nghĩa",
+          "Nhưng",
+          "Tuy, mặc dù",
+          "Lần"
+        ],
+        "answer": "Tuy, mặc dù",
+        "pinyin": "suīrán",
+        "meaning": "Tuy, mặc dù",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q4",
+        "type": "meaning-to-hanzi",
+        "prompt": "Lần",
+        "options": [
+          "意思",
+          "但是",
+          "虽然",
+          "次"
+        ],
+        "answer": "次",
+        "pinyin": "cì",
+        "meaning": "Lần",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "p1",
+        "type": "hanzi-to-pinyin",
+        "prompt": "玩儿",
+        "options": [
+          "wánr",
+          "yìsi",
+          "dànshì",
+          "suīrán"
+        ],
+        "answer": "wánr",
+        "meaning": "Chơi",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "p2",
+        "type": "hanzi-to-pinyin",
+        "prompt": "晴",
+        "options": [
+          "qíng",
+          "yìsi",
+          "dànshì",
+          "suīrán"
+        ],
+        "answer": "qíng",
+        "meaning": "Nắng, trời quang",
+        "sourceStatus": "VERIFIED"
+      }
+    ],
+    "matchingPairs": [
+      {
+        "id": "m1",
+        "zh": "意思",
+        "pinyin": "yìsi",
+        "vi": "Ý nghĩa"
+      },
+      {
+        "id": "m2",
+        "zh": "但是",
+        "pinyin": "dànshì",
+        "vi": "Nhưng"
+      },
+      {
+        "id": "m3",
+        "zh": "虽然",
+        "pinyin": "suīrán",
+        "vi": "Tuy, mặc dù"
+      },
+      {
+        "id": "m4",
+        "zh": "次",
+        "pinyin": "cì",
+        "vi": "Lần"
+      },
+      {
+        "id": "m5",
+        "zh": "玩儿",
+        "pinyin": "wánr",
+        "vi": "Chơi"
+      },
+      {
+        "id": "m6",
+        "zh": "晴",
+        "pinyin": "qíng",
+        "vi": "Nắng, trời quang"
+      },
+      {
+        "id": "m7",
+        "zh": "百",
+        "pinyin": "bǎi",
+        "vi": "Trăm"
+      }
+    ]
+  },
+  "workbookExercises": {
+    "audioFile": "audio/workbook/lesson-14-workbook-audio-1.mp3",
+    "sourceStatus": "official-answer-key-verified",
+    "listeningPart1": {
+      "type": "listening-true-false-image",
+      "sourceStatus": "official-workbook",
+      "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 130.",
+      "questions": [
+        {
+          "id": 1,
+          "image": "images/workbook/lesson14/listening-part1/q01.png",
+          "imageSource": "official-workbook",
+          "answer": false
+        },
+        {
+          "id": 2,
+          "image": "images/workbook/lesson14/listening-part1/q02.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 3,
+          "image": "images/workbook/lesson14/listening-part1/q03.png",
+          "imageSource": "official-workbook",
+          "answer": false
+        },
+        {
+          "id": 4,
+          "image": "images/workbook/lesson14/listening-part1/q04.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 5,
+          "image": "images/workbook/lesson14/listening-part1/q05.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        }
       ]
     },
-    grammarPractice: [
-      { type: "choice", prompt: "Chọn câu hỏi kinh nghiệm đúng.", options: ["你看过那个电影吗？", "你看那个电影过吗？", "你过看那个电影吗？"], answer: "你看过那个电影吗？", explain: "过 đứng sau động từ 看.", source: "book", grammarId: "g1" },
-      { type: "fill", prompt: "我没看（ ）那个电影。", answer: "过", explain: "没 + V + 过: chưa từng.", source: "book", grammarId: "g1" },
-      { type: "fill", prompt: "（ ）外面很冷，但是房间里很热。", answer: "虽然", explain: "虽然 mở đầu vế nhượng bộ.", source: "book", grammarId: "g2" },
-      { type: "choice", prompt: "Chọn câu đúng.", options: ["虽然汉字很难，但是我很喜欢。", "虽然汉字很难，我但是很喜欢。", "汉字虽然但是很难。"], answer: "虽然汉字很难，但是我很喜欢。", explain: "但是 đứng đầu vế thứ hai.", source: "book", grammarId: "g2" },
-      { type: "fill", prompt: "我去过三（ ）北京。", answer: "次", explain: "次 chỉ số lần.", source: "book", grammarId: "g3" },
-      { type: "order", prompt: "Sắp xếp câu.", pieces: ["我", "看过", "这个电影", "两次"], answer: "我看过这个电影两次", explain: "两次 đặt sau tân ngữ trong mẫu này.", source: "ai", grammarId: "g3" }
+    "imageSets": {
+      "listeningPart2": {
+        "sourceStatus": "official-workbook",
+        "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 131.",
+        "images": [
+          {
+            "id": "A",
+            "src": "images/workbook/lesson14/listening-part2/a.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "B",
+            "src": "images/workbook/lesson14/listening-part2/b.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "C",
+            "src": "images/workbook/lesson14/listening-part2/c.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "D",
+            "src": "images/workbook/lesson14/listening-part2/d.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "E",
+            "src": "images/workbook/lesson14/listening-part2/e.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "F",
+            "src": "images/workbook/lesson14/listening-part2/f.png",
+            "imageSource": "official-workbook"
+          }
+        ]
+      },
+      "readingPart1": {
+        "sourceStatus": "official-workbook",
+        "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 133.",
+        "images": [
+          {
+            "id": "A",
+            "src": "images/workbook/lesson14/reading-part1/a.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "B",
+            "src": "images/workbook/lesson14/reading-part1/b.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "C",
+            "src": "images/workbook/lesson14/reading-part1/c.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "D",
+            "src": "images/workbook/lesson14/reading-part1/d.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "E",
+            "src": "images/workbook/lesson14/reading-part1/e.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "F",
+            "src": "images/workbook/lesson14/reading-part1/f.png",
+            "imageSource": "official-workbook"
+          }
+        ]
+      }
+    },
+    "listeningPart2": [
+      {
+        "id": 6,
+        "question": "Câu 6",
+        "answer": "E"
+      },
+      {
+        "id": 7,
+        "question": "Câu 7",
+        "answer": "F"
+      },
+      {
+        "id": 8,
+        "question": "Câu 8",
+        "answer": "A"
+      },
+      {
+        "id": 9,
+        "question": "Câu 9",
+        "answer": "B"
+      },
+      {
+        "id": 10,
+        "question": "Câu 10",
+        "answer": "C"
+      }
     ],
-    shortPractice: [
-      { type: "choice", prompt: "“Tuy... nhưng...” là cấu trúc nào?", options: ["虽然……但是……", "因为……所以……", "从……到……"], answer: "虽然……但是……", source: "book" },
-      { type: "fill", prompt: "你看（ ）那个电影吗？", answer: "过", source: "book" },
-      { type: "order", prompt: "Sắp xếp câu.", pieces: ["虽然", "是晴天", "但是", "很冷"], answer: "虽然是晴天但是很冷", source: "book" },
-      { type: "translate", prompt: "Dịch sang tiếng Trung: Tôi từng đến Bắc Kinh ba lần.", answer: "我去过三次北京。", source: "book" }
+    "listeningPart3": [
+      {
+        "id": 11,
+        "question": "Câu 11",
+        "options": [
+          "A Lựa chọn A",
+          "B Lựa chọn B",
+          "C Lựa chọn C"
+        ],
+        "answer": "B"
+      },
+      {
+        "id": 12,
+        "question": "Câu 12",
+        "options": [
+          "A Lựa chọn A",
+          "B Lựa chọn B",
+          "C Lựa chọn C"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 13,
+        "question": "Câu 13",
+        "options": [
+          "A Lựa chọn A",
+          "B Lựa chọn B",
+          "C Lựa chọn C"
+        ],
+        "answer": "A"
+      },
+      {
+        "id": 14,
+        "question": "Câu 14",
+        "options": [
+          "A Lựa chọn A",
+          "B Lựa chọn B",
+          "C Lựa chọn C"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 15,
+        "question": "Câu 15",
+        "options": [
+          "A Lựa chọn A",
+          "B Lựa chọn B",
+          "C Lựa chọn C"
+        ],
+        "answer": "B"
+      }
     ],
-    workbook: [
-      { id: "ai-fill-1-5", title: "Bài tập tự chấm bổ sung - Điền từ", source: "ai", type: "fillChoice", choices: [
-        { key: "A", text: "意思" }, { key: "B", text: "虽然" }, { key: "C", text: "但是" }, { key: "D", text: "次" }, { key: "E", text: "晴" }, { key: "F", text: "百" }
-      ], questions: [
-        { id: "1", prompt: "这个字是什么（ ）？", answer: "A" },
-        { id: "2", prompt: "（ ）外面很冷，但是房间里很热。", answer: "B" },
-        { id: "3", prompt: "虽然是晴天，（ ）很冷。", answer: "C" },
-        { id: "4", prompt: "我去过两（ ）北京。", answer: "D" },
-        { id: "5", prompt: "这本书一（ ）块。", answer: "F" }
-      ] },
-      { id: "ai-judge-6-10", title: "Bài tập tự chấm bổ sung - Đúng/Sai", source: "ai", type: "trueFalse", questions: [
-        { id: "6", original: "我没看过那个电影。", prompt: "我以前看过那个电影。", answer: "x" },
-        { id: "7", original: "虽然汉字很难，但是我很喜欢写汉字。", prompt: "他说他不喜欢写汉字。", answer: "x" },
-        { id: "8", original: "我们去过三次北京。", prompt: "他们有去北京的经验。", answer: "√" },
-        { id: "9", original: "虽然是晴天，但是很冷。", prompt: "今天不冷。", answer: "x" },
-        { id: "10", original: "这个字是什么意思？", prompt: "说话的人在问字的意思。", answer: "√" }
-      ] },
-      { id: "ai-mix-11-15", title: "Bài tập tự chấm bổ sung - Tổng hợp", source: "ai", type: "matchChoice", choices: [
-        { key: "A", text: "你看过那个电影吗？" }, { key: "B", text: "虽然外面很冷，但是房间里很热。" }, { key: "C", text: "我去过三次北京。" }, { key: "D", text: "这个字是什么意思？" }, { key: "E", text: "周末我们一起去玩儿吧。" }
-      ], questions: [
-        { id: "11", prompt: "Bạn từng xem bộ phim đó chưa?", answer: "A" },
-        { id: "12", prompt: "Tuy ngoài trời lạnh nhưng trong phòng nóng.", answer: "B" },
-        { id: "13", prompt: "Tôi từng đi Bắc Kinh ba lần.", answer: "C" },
-        { id: "14", prompt: "Chữ này nghĩa là gì?", answer: "D" },
-        { id: "15", prompt: "Cuối tuần chúng ta cùng đi chơi nhé.", answer: "E" }
-      ] }
+    "readingPart1": [
+      {
+        "id": 16,
+        "text": "我看过这部电影。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 17,
+        "text": "虽然外面很冷，但是她还要出去。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "E"
+      },
+      {
+        "id": 18,
+        "text": "我去过长城。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "A"
+      },
+      {
+        "id": 19,
+        "text": "这本书很有意思。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "F"
+      },
+      {
+        "id": 20,
+        "text": "这件衣服一百多块。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "B"
+      }
     ],
-    workbookReference: [
-      { title: "Sách bài tập Bài 14", source: "book", note: "Trong HSK2.md hiện tại chưa có phần sách bài tập Bài 14 đầy đủ, nên không tạo đáp án sách hoặc bài nghe sách tự chấm.", lines: ["Từ mới “但是” trong nguồn có dấu ngoặc kép; dữ liệu hiển thị dùng dạng chữ chuẩn 但是.", "Nguồn có mẩu bất thường “表达/但是” và một số dòng dịch ví dụ bị lẫn nội dung; các mẩu này không dùng để tạo bài AI."] }
+    "readingPart2": {
+      "options": [
+        {
+          "key": "A",
+          "word": "意思"
+        },
+        {
+          "key": "B",
+          "word": "虽然"
+        },
+        {
+          "key": "C",
+          "word": "但是"
+        },
+        {
+          "key": "D",
+          "word": "次"
+        },
+        {
+          "key": "E",
+          "word": "晴"
+        },
+        {
+          "key": "F",
+          "word": "百"
+        }
+      ],
+      "questions": [
+        {
+          "id": 21,
+          "text": "这个字是什么（ ）？",
+          "answer": "C"
+        },
+        {
+          "id": 22,
+          "text": "（ ）外面很冷，但是房间里很热。",
+          "answer": "F"
+        },
+        {
+          "id": 23,
+          "text": "虽然是晴天，（ ）很冷。",
+          "answer": "A"
+        },
+        {
+          "id": 24,
+          "text": "我去过两（ ）北京。",
+          "answer": "B"
+        },
+        {
+          "id": 25,
+          "text": "这本书一（ ）块。",
+          "answer": "D"
+        }
+      ]
+    },
+    "readingPart3": [
+      {
+        "id": 26,
+        "text": "我没看过那个电影。",
+        "statement": "我以前看过那个电影。",
+        "answer": false,
+        "explanation": ""
+      },
+      {
+        "id": 27,
+        "text": "虽然汉字很难，但是我很喜欢写汉字。",
+        "statement": "他说他不喜欢写汉字。",
+        "answer": false,
+        "explanation": ""
+      },
+      {
+        "id": 28,
+        "text": "我们去过三次北京。",
+        "statement": "他们有去北京的经验。",
+        "answer": false,
+        "explanation": ""
+      },
+      {
+        "id": 29,
+        "text": "虽然是晴天，但是很冷。",
+        "statement": "今天不冷。",
+        "answer": false,
+        "explanation": ""
+      },
+      {
+        "id": 30,
+        "text": "这个字是什么意思？",
+        "statement": "说话的人在问字的意思。",
+        "answer": true,
+        "explanation": ""
+      }
     ],
-    supplementalHomework: [
-      { type: "choice", prompt: "Chọn câu đúng.", options: ["我看过这个电影。", "我看这个电影过。", "我过看这个电影。"], answer: "我看过这个电影。", explain: "过 đứng sau động từ 看.", source: "ai" },
-      { type: "fill", prompt: "虽然是晴天，（ ）很冷。", answer: "但是", explain: "但是 nối vế tương phản.", source: "ai" },
-      { type: "translate", prompt: "Dịch sang tiếng Trung: Tôi chưa từng xem bộ phim đó.", answer: "我没看过那个电影。", explain: "没 + V + 过.", source: "ai" }
+    "readingPart4": {
+      "type": "dialogue-matching",
+      "sourcePage": 136,
+      "options": [
+        {
+          "key": "A",
+          "text": "你出去的时候多穿些衣服。"
+        },
+        {
+          "key": "B",
+          "text": "你在那个商店买过东西没有？"
+        },
+        {
+          "key": "C",
+          "text": "妈妈告诉过我很多次，长时间玩儿电脑和手机对眼睛不好。"
+        },
+        {
+          "key": "D",
+          "text": "没学过，听说很难，但是很有意思。"
+        },
+        {
+          "key": "E",
+          "text": "他在哪儿呢？你看见他了吗？（例）"
+        },
+        {
+          "key": "F",
+          "text": "没关系，喜欢就买吧。"
+        }
+      ],
+      "questions": [
+        {
+          "id": 31,
+          "text": "你学过汉语吗？",
+          "answer": "D"
+        },
+        {
+          "id": 32,
+          "text": "今天真冷，第一次到了零下10度。",
+          "answer": "A"
+        },
+        {
+          "id": 33,
+          "text": "所以我现在很少玩儿电脑和手机了。",
+          "answer": "C"
+        },
+        {
+          "id": 34,
+          "text": "我很喜欢这件衣服，但是觉得有点儿贵。",
+          "answer": "F"
+        },
+        {
+          "id": 35,
+          "text": "东西还可以，而且很便宜。",
+          "answer": "B"
+        }
+      ]
+    }
+  },
+  "migrationAudit": {
+    "officialAnswersSource": "HSK2 Đáp án sách bài tập.pdf",
+    "officialImagesSource": "HSK 2 Sách bài tập.pdf",
+    "audioSource": "audio/workbook",
+    "cleanedSourceArtifacts": [
+      "Audio ngữ âm được giữ trong lessonInfo nhưng không render trong tab Ngữ pháp.",
+      "Bài 14-15: thay placeholder Đọc bằng dữ liệu bài tập cũ có nghĩa học tập; đáp án giữ theo PDF chính thức.",
+      "Đọc phần 4 bảo đảm đủ lựa chọn A-F để khớp đáp án chính thức."
     ],
-    listeningHomework: [
-      { id: "listen-ai-1", title: "Nghe chọn đáp án", source: "ai", script: "我看过那个电影两次。", prompt: "他看过几次那个电影？", options: ["两次", "一次", "三次"], answer: "两次", explain: "Script nói 两次." },
-      { id: "listen-ai-2", title: "Nghe đúng/sai", source: "ai", script: "虽然外面很冷，但是房间里很热。", prompt: "房间里很冷。", options: ["√", "x"], answer: "x", explain: "Script nói phòng rất nóng." },
-      { id: "listen-ai-3", title: "Nghe điền từ", source: "ai", script: "这个字是什么意思？", prompt: "这个字是什么（ ）？", answer: "意思", explain: "Từ nghe được là 意思." },
-      { id: "listen-ai-4", title: "Nghe hội thoại và trả lời", source: "ai", script: "女：你去过北京吗？\n男：去过三次。", prompt: "男的去过北京几次？", options: ["三次", "没去过", "一次"], answer: "三次", explain: "Script nói 去过三次。" }
-    ]
-  };
-  const index = window.HSK2_DATA.lessons.findIndex((item) => item.id === lesson.id);
-  if (index >= 0) window.HSK2_DATA.lessons[index] = lesson;
-})();
+    "needsVerification": []
+  }
+};
+
+window.lesson14Data = lesson14Data;

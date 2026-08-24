@@ -1,121 +1,861 @@
-(function () {
-  const lesson = {
-    id: "lesson08",
-    order: 8,
-    type: "lesson",
-    status: "ready",
-    title: "让我想想再告诉你",
-    viTitle: "Để mình suy nghĩ rồi sẽ nói cho bạn biết",
-    scope: "Bài 8",
-    sourceRange: "HSK2.md: sách giáo trình Bài 8 và sách bài tập Bài 8",
-    vocabulary: [
-      { hanzi: "再", pinyin: "zài", pos: "Phó từ", meaning: "Lại, lần nữa, hãy, rồi sẽ...", example: "明天再给他打电话吧。", examplePinyin: "Míngtiān zài gěi tā dǎ diànhuà ba.", exampleVi: "Ngày mai hãy gọi lại cho cậu ấy nhé.", source: "book" },
-      { hanzi: "让", pinyin: "ràng", pos: "Động từ", meaning: "Để, bảo, cho phép", example: "王老师让我给张朋打个电话。", examplePinyin: "Wáng lǎoshī ràng wǒ gěi Zhāng Péng dǎ ge diànhuà.", exampleVi: "Thầy Vương bảo tôi gọi điện cho Trương Bằng.", source: "book" },
-      { hanzi: "告诉", pinyin: "gàosù", pos: "Động từ", meaning: "Nói, bảo, nói cho biết", example: "让我想想再告诉你。", examplePinyin: "Ràng wǒ xiǎngxiang zài gàosu nǐ.", exampleVi: "Để tôi suy nghĩ rồi sẽ nói cho bạn biết.", source: "book" },
-      { hanzi: "等", pinyin: "děng", pos: "Động từ", meaning: "Đợi, chờ", example: "他让你等一会儿。", examplePinyin: "Tā ràng nǐ děng yíhuìr.", exampleVi: "Thầy ấy bảo bạn đợi một lát.", source: "book" },
-      { hanzi: "找", pinyin: "zhǎo", pos: "Động từ", meaning: "Tìm, tìm kiếm", example: "下个星期再找时间。", examplePinyin: "Xià ge xīngqī zài zhǎo shíjiān.", exampleVi: "Tuần sau lại tìm thời gian.", source: "book" },
-      { hanzi: "事情", pinyin: "shìqing", pos: "Danh từ", meaning: "Sự việc, việc", example: "你找服务员有什么事情？", examplePinyin: "Nǐ zhǎo fúwùyuán yǒu shénme shìqing?", exampleVi: "Bạn tìm nhân viên phục vụ có việc gì?", source: "book" },
-      { hanzi: "服务员", pinyin: "fúwùyuán", pos: "Danh từ", meaning: "Nhân viên phục vụ, bồi bàn", example: "请问，你找服务员有什么事情？", examplePinyin: "Qǐngwèn, nǐ zhǎo fúwùyuán yǒu shénme shìqing?", exampleVi: "Xin hỏi, bạn tìm nhân viên phục vụ có việc gì?", source: "book" },
-      { hanzi: "白", pinyin: "bái", pos: "Tính từ", meaning: "Trắng, có màu trắng", example: "这件白的有点儿长。", examplePinyin: "Zhè jiàn bái de yǒudiǎnr cháng.", exampleVi: "Chiếc màu trắng này hơi dài.", source: "book" },
-      { hanzi: "黑", pinyin: "hēi", pos: "Tính từ", meaning: "Đen, có màu đen", example: "那件黑的有点儿贵。", examplePinyin: "Nà jiàn hēi de yǒudiǎnr guì.", exampleVi: "Chiếc màu đen kia hơi đắt.", source: "book" },
-      { hanzi: "贵", pinyin: "guì", pos: "Tính từ", meaning: "Đắt, mắc", example: "这个商店的东西有点儿贵。", examplePinyin: "Zhège shāngdiàn de dōngxi yǒudiǎnr guì.", exampleVi: "Đồ ở cửa hàng này hơi đắt.", source: "book" }
-    ],
-    grammar: [
-      { id: "g1", title: "Câu hỏi ……, 好吗？", structure: "Mệnh đề đề xuất + ，好吗？", explanation: "Đặt cuối câu để đưa ra đề xuất và hỏi ý kiến người nghe.", examples: [
-        { zh: "我们一起去吃饭，好吗？", pinyin: "Wǒmen yìqǐ qù chīfàn, hǎo ma?", vi: "Chúng ta cùng đi ăn cơm nhé, được không?" },
-        { zh: "你明天下午给我打电话，好吗？", pinyin: "Nǐ míngtiān xiàwǔ gěi wǒ dǎ diànhuà, hǎo ma?", vi: "Chiều mai bạn gọi điện cho tôi nhé, được không?" },
-        { zh: "我们下午去看电影，好吗？", pinyin: "Wǒmen xiàwǔ qù kàn diànyǐng, hǎo ma?", vi: "Chiều nay chúng ta đi xem phim nhé, được không?" }
-      ], source: "book" },
-      { id: "g2", title: "Phó từ 再", structure: "再 + động từ", explanation: "Biểu thị hành động sẽ lặp lại hoặc xảy ra sau một điều kiện/tình huống khác.", examples: [
-        { zh: "你再看看这本书吧。", pinyin: "Nǐ zài kànkan zhè běn shū ba.", vi: "Bạn hãy đọc lại quyển sách này đi." },
-        { zh: "你明天再给我打电话吧。", pinyin: "Nǐ míngtiān zài gěi wǒ dǎ diànhuà ba.", vi: "Ngày mai bạn hãy gọi lại cho tôi nhé." },
-        { zh: "让我想想再告诉你。", pinyin: "Ràng wǒ xiǎngxiang zài gàosu nǐ.", vi: "Để tôi suy nghĩ đã rồi sẽ nói cho bạn biết." }
-      ], source: "book" },
-      { id: "g3", title: "Câu kiêm ngữ", structure: "Chủ ngữ + 请/让/叫 + tân ngữ/chủ ngữ + động từ 2", explanation: "Tân ngữ của động từ thứ nhất đồng thời là chủ ngữ thực hiện hành động thứ hai.", examples: [
-        { zh: "我请你吃饭。", pinyin: "Wǒ qǐng nǐ chīfàn.", vi: "Tôi mời bạn ăn cơm." },
-        { zh: "你让我再想想。", pinyin: "Nǐ ràng wǒ zài xiǎngxiang.", vi: "Bạn để tôi suy nghĩ thêm đã." },
-        { zh: "我叫人去看看。", pinyin: "Wǒ jiào rén qù kànkan.", vi: "Tôi bảo người đi xem thử." }
-      ], source: "book" },
-      { id: "g4", title: "Lặp lại động từ", structure: "A → AA / A一A; AB → ABAB", explanation: "Diễn tả hành động ngắn, nhẹ, thử làm hoặc làm một chút.", examples: [
-        { zh: "说说 / 说一说", pinyin: "shuōshuo / shuō yi shuō", vi: "Nói một chút." },
-        { zh: "看看 / 看一看", pinyin: "kànkan / kàn yi kàn", vi: "Xem thử." },
-        { zh: "准备准备", pinyin: "zhǔnbèi zhǔnbèi", vi: "Chuẩn bị một chút." }
-      ], source: "book" }
-    ],
-    vocabGames: {
-      fillSentences: [
-        { prompt: "让我想想再（ ）你。", answer: "告诉", hint: "nói cho biết", source: "book" },
-        { prompt: "他让你（ ）一会儿。", answer: "等", hint: "đợi", source: "book" },
-        { prompt: "下个星期再（ ）时间。", answer: "找", hint: "tìm", source: "book" },
-        { prompt: "这件（ ）的有点儿长。", answer: "白", hint: "trắng", source: "book" }
+/**
+ * Data Schema for HSK2 Standard Course - Lesson 08
+ * Source: Giáo trình Chuẩn HSK 2 & Sách Bài Tập HSK 2 (migrated, official workbook answers verified)
+ */
+
+const lesson08Data = {
+  "lessonInfo": {
+    "id": 8,
+    "titleZH": "让我想想再告诉你",
+    "titleVI": "Để mình suy nghĩ rồi sẽ nói cho bạn biết",
+    "audioMain": "audio/workbook/lesson-08-workbook-audio-1.mp3",
+    "audioPronunciation": "audio/workbook/lesson-08-workbook-audio-2.mp3",
+    "pronunciationAudio": "audio/workbook/lesson-08-workbook-audio-2.mp3",
+    "sourceStatus": "MIGRATED_FROM_OLD_SCHEMA"
+  },
+  "vocabulary": [
+    {
+      "id": 1,
+      "hanzi": "再",
+      "pinyin": "zài",
+      "wordType": "Phó từ",
+      "meaning": "Lại, lần nữa, hãy, rồi sẽ...",
+      "exampleZH": "明天再给他打电话吧。",
+      "examplePinyin": "Míngtiān zài gěi tā dǎ diànhuà ba.",
+      "exampleVI": "Ngày mai hãy gọi lại cho cậu ấy nhé.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 2,
+      "hanzi": "让",
+      "pinyin": "ràng",
+      "wordType": "Động từ",
+      "meaning": "Để, bảo, cho phép",
+      "exampleZH": "王老师让我给张朋打个电话。",
+      "examplePinyin": "Wáng lǎoshī ràng wǒ gěi Zhāng Péng dǎ ge diànhuà.",
+      "exampleVI": "Thầy Vương bảo tôi gọi điện cho Trương Bằng.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 3,
+      "hanzi": "告诉",
+      "pinyin": "gàosù",
+      "wordType": "Động từ",
+      "meaning": "Nói, bảo, nói cho biết",
+      "exampleZH": "让我想想再告诉你。",
+      "examplePinyin": "Ràng wǒ xiǎngxiang zài gàosu nǐ.",
+      "exampleVI": "Để tôi suy nghĩ rồi sẽ nói cho bạn biết.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 4,
+      "hanzi": "等",
+      "pinyin": "děng",
+      "wordType": "Động từ",
+      "meaning": "Đợi, chờ",
+      "exampleZH": "他让你等一会儿。",
+      "examplePinyin": "Tā ràng nǐ děng yíhuìr.",
+      "exampleVI": "Thầy ấy bảo bạn đợi một lát.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 5,
+      "hanzi": "找",
+      "pinyin": "zhǎo",
+      "wordType": "Động từ",
+      "meaning": "Tìm, tìm kiếm",
+      "exampleZH": "下个星期再找时间。",
+      "examplePinyin": "Xià ge xīngqī zài zhǎo shíjiān.",
+      "exampleVI": "Tuần sau lại tìm thời gian.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 6,
+      "hanzi": "事情",
+      "pinyin": "shìqing",
+      "wordType": "Danh từ",
+      "meaning": "Sự việc, việc",
+      "exampleZH": "你找服务员有什么事情？",
+      "examplePinyin": "Nǐ zhǎo fúwùyuán yǒu shénme shìqing?",
+      "exampleVI": "Bạn tìm nhân viên phục vụ có việc gì?",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 7,
+      "hanzi": "服务员",
+      "pinyin": "fúwùyuán",
+      "wordType": "Danh từ",
+      "meaning": "Nhân viên phục vụ, bồi bàn",
+      "exampleZH": "请问，你找服务员有什么事情？",
+      "examplePinyin": "Qǐngwèn, nǐ zhǎo fúwùyuán yǒu shénme shìqing?",
+      "exampleVI": "Xin hỏi, bạn tìm nhân viên phục vụ có việc gì?",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 8,
+      "hanzi": "白",
+      "pinyin": "bái",
+      "wordType": "Tính từ",
+      "meaning": "Trắng, có màu trắng",
+      "exampleZH": "这件白的有点儿长。",
+      "examplePinyin": "Zhè jiàn bái de yǒudiǎnr cháng.",
+      "exampleVI": "Chiếc màu trắng này hơi dài.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 9,
+      "hanzi": "黑",
+      "pinyin": "hēi",
+      "wordType": "Tính từ",
+      "meaning": "Đen, có màu đen",
+      "exampleZH": "那件黑的有点儿贵。",
+      "examplePinyin": "Nà jiàn hēi de yǒudiǎnr guì.",
+      "exampleVI": "Chiếc màu đen kia hơi đắt.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 10,
+      "hanzi": "贵",
+      "pinyin": "guì",
+      "wordType": "Tính từ",
+      "meaning": "Đắt, mắc",
+      "exampleZH": "这个商店的东西有点儿贵。",
+      "examplePinyin": "Zhège shāngdiàn de dōngxi yǒudiǎnr guì.",
+      "exampleVI": "Đồ ở cửa hàng này hơi đắt.",
+      "sourceStatus": "VERIFIED"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g1",
+      "name": "Câu hỏi ……, 好吗？",
+      "formula": "Mệnh đề đề xuất + ，好吗？",
+      "explanation": "Đặt cuối câu để đưa ra đề xuất và hỏi ý kiến người nghe.",
+      "examples": [
+        {
+          "zh": "我们一起去吃饭，好吗？",
+          "pinyin": "Wǒmen yìqǐ qù chīfàn, hǎo ma?",
+          "vi": "Chúng ta cùng đi ăn cơm nhé, được không?"
+        },
+        {
+          "zh": "你明天下午给我打电话，好吗？",
+          "pinyin": "Nǐ míngtiān xiàwǔ gěi wǒ dǎ diànhuà, hǎo ma?",
+          "vi": "Chiều mai bạn gọi điện cho tôi nhé, được không?"
+        },
+        {
+          "zh": "我们下午去看电影，好吗？",
+          "pinyin": "Wǒmen xiàwǔ qù kàn diànyǐng, hǎo ma?",
+          "vi": "Chiều nay chúng ta đi xem phim nhé, được không?"
+        }
       ],
-      listeningChoice: [
-        { script: "告诉", prompt: "Nghe và chọn từ đúng", answer: "告诉", options: ["告诉", "事情", "服务员", "找"], source: "ai" },
-        { script: "让", prompt: "Nghe và chọn từ đúng", answer: "让", options: ["让", "再", "等", "贵"], source: "ai" },
-        { script: "黑", prompt: "Nghe và chọn từ đúng", answer: "黑", options: ["黑", "白", "贵", "再"], source: "ai" }
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "Chọn câu đề nghị đúng.",
+        "options": [
+          "晚上去看电影，好吗？",
+          "好吗晚上去看电影？",
+          "晚上好吗去看电影？"
+        ],
+        "answer": "晚上去看电影，好吗？",
+        "explanation": "好吗 đặt cuối mệnh đề đề xuất."
+      }
+    },
+    {
+      "id": "g2",
+      "name": "Phó từ 再",
+      "formula": "再 + động từ",
+      "explanation": "Biểu thị hành động sẽ lặp lại hoặc xảy ra sau một điều kiện/tình huống khác.",
+      "examples": [
+        {
+          "zh": "你再看看这本书吧。",
+          "pinyin": "Nǐ zài kànkan zhè běn shū ba.",
+          "vi": "Bạn hãy đọc lại quyển sách này đi."
+        },
+        {
+          "zh": "你明天再给我打电话吧。",
+          "pinyin": "Nǐ míngtiān zài gěi wǒ dǎ diànhuà ba.",
+          "vi": "Ngày mai bạn hãy gọi lại cho tôi nhé."
+        },
+        {
+          "zh": "让我想想再告诉你。",
+          "pinyin": "Ràng wǒ xiǎngxiang zài gàosu nǐ.",
+          "vi": "Để tôi suy nghĩ đã rồi sẽ nói cho bạn biết."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "Chọn câu dùng 再 đúng.",
+        "options": [
+          "你明天再给我打电话吧。",
+          "你再明天给我打电话吧。",
+          "你给我再明天打电话吧。"
+        ],
+        "answer": "你明天再给我打电话吧。",
+        "explanation": "再 đứng trước động từ 给/打电话."
+      }
+    },
+    {
+      "id": "g3",
+      "name": "Câu kiêm ngữ",
+      "formula": "Chủ ngữ + 请/让/叫 + tân ngữ/chủ ngữ + động từ 2",
+      "explanation": "Tân ngữ của động từ thứ nhất đồng thời là chủ ngữ thực hiện hành động thứ hai.",
+      "examples": [
+        {
+          "zh": "我请你吃饭。",
+          "pinyin": "Wǒ qǐng nǐ chīfàn.",
+          "vi": "Tôi mời bạn ăn cơm."
+        },
+        {
+          "zh": "你让我再想想。",
+          "pinyin": "Nǐ ràng wǒ zài xiǎngxiang.",
+          "vi": "Bạn để tôi suy nghĩ thêm đã."
+        },
+        {
+          "zh": "我叫人去看看。",
+          "pinyin": "Wǒ jiào rén qù kànkan.",
+          "vi": "Tôi bảo người đi xem thử."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "王老师（ ）我给张朋打个电话。",
+        "options": [],
+        "answer": "让",
+        "explanation": "让 + người + làm việc gì."
+      }
+    },
+    {
+      "id": "g4",
+      "name": "Lặp lại động từ",
+      "formula": "A → AA / A一A; AB → ABAB",
+      "explanation": "Diễn tả hành động ngắn, nhẹ, thử làm hoặc làm một chút.",
+      "examples": [
+        {
+          "zh": "说说 / 说一说",
+          "pinyin": "shuōshuo / shuō yi shuō",
+          "vi": "Nói một chút."
+        },
+        {
+          "zh": "看看 / 看一看",
+          "pinyin": "kànkan / kàn yi kàn",
+          "vi": "Xem thử."
+        },
+        {
+          "zh": "准备准备",
+          "pinyin": "zhǔnbèi zhǔnbèi",
+          "vi": "Chuẩn bị một chút."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "你再（ ）这本书吧。",
+        "options": [],
+        "answer": "看看",
+        "explanation": "看 lặp lại thành 看看 để nói xem thử/xem một chút."
+      }
+    }
+  ],
+  "vocabularyGames": {
+    "quizQuestions": [
+      {
+        "id": "q1",
+        "type": "hanzi-to-meaning",
+        "prompt": "再",
+        "options": [
+          "Lại, lần nữa, hãy, rồi sẽ...",
+          "Để, bảo, cho phép",
+          "Nói, bảo, nói cho biết",
+          "Đợi, chờ"
+        ],
+        "answer": "Lại, lần nữa, hãy, rồi sẽ...",
+        "pinyin": "zài",
+        "meaning": "Lại, lần nữa, hãy, rồi sẽ...",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q2",
+        "type": "meaning-to-hanzi",
+        "prompt": "Để, bảo, cho phép",
+        "options": [
+          "再",
+          "让",
+          "告诉",
+          "等"
+        ],
+        "answer": "让",
+        "pinyin": "ràng",
+        "meaning": "Để, bảo, cho phép",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q3",
+        "type": "hanzi-to-meaning",
+        "prompt": "告诉",
+        "options": [
+          "Lại, lần nữa, hãy, rồi sẽ...",
+          "Để, bảo, cho phép",
+          "Nói, bảo, nói cho biết",
+          "Đợi, chờ"
+        ],
+        "answer": "Nói, bảo, nói cho biết",
+        "pinyin": "gàosù",
+        "meaning": "Nói, bảo, nói cho biết",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q4",
+        "type": "meaning-to-hanzi",
+        "prompt": "Đợi, chờ",
+        "options": [
+          "再",
+          "让",
+          "告诉",
+          "等"
+        ],
+        "answer": "等",
+        "pinyin": "děng",
+        "meaning": "Đợi, chờ",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "p1",
+        "type": "hanzi-to-pinyin",
+        "prompt": "找",
+        "options": [
+          "zhǎo",
+          "zài",
+          "ràng",
+          "gàosù"
+        ],
+        "answer": "zhǎo",
+        "meaning": "Tìm, tìm kiếm",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "p2",
+        "type": "hanzi-to-pinyin",
+        "prompt": "事情",
+        "options": [
+          "shìqing",
+          "zài",
+          "ràng",
+          "gàosù"
+        ],
+        "answer": "shìqing",
+        "meaning": "Sự việc, việc",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f1",
+        "type": "meaning-to-hanzi",
+        "prompt": "“Nhân viên phục vụ” là từ nào?",
+        "options": [
+          "服务员",
+          "事情",
+          "告诉",
+          "找"
+        ],
+        "answer": "服务员",
+        "translation": "",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f2",
+        "type": "fill-blank",
+        "prompt": "王老师（ ）我告诉你。",
+        "options": [
+          "再",
+          "让",
+          "告诉",
+          "等"
+        ],
+        "answer": "让",
+        "translation": "",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f3",
+        "type": "meaning-to-hanzi",
+        "prompt": "Chọn nghĩa đúng của 贵.",
+        "options": [
+          "Đắt",
+          "Trắng",
+          "Đen",
+          "Đợi"
+        ],
+        "answer": "Đắt",
+        "translation": "",
+        "sourceStatus": "VERIFIED"
+      }
+    ],
+    "matchingPairs": [
+      {
+        "id": "m1",
+        "zh": "再",
+        "pinyin": "zài",
+        "vi": "Lại, lần nữa, hãy, rồi sẽ..."
+      },
+      {
+        "id": "m2",
+        "zh": "让",
+        "pinyin": "ràng",
+        "vi": "Để, bảo, cho phép"
+      },
+      {
+        "id": "m3",
+        "zh": "告诉",
+        "pinyin": "gàosù",
+        "vi": "Nói, bảo, nói cho biết"
+      },
+      {
+        "id": "m4",
+        "zh": "等",
+        "pinyin": "děng",
+        "vi": "Đợi, chờ"
+      },
+      {
+        "id": "m5",
+        "zh": "找",
+        "pinyin": "zhǎo",
+        "vi": "Tìm, tìm kiếm"
+      },
+      {
+        "id": "m6",
+        "zh": "事情",
+        "pinyin": "shìqing",
+        "vi": "Sự việc, việc"
+      },
+      {
+        "id": "m7",
+        "zh": "服务员",
+        "pinyin": "fúwùyuán",
+        "vi": "Nhân viên phục vụ, bồi bàn"
+      },
+      {
+        "id": "m8",
+        "zh": "白",
+        "pinyin": "bái",
+        "vi": "Trắng, có màu trắng"
+      }
+    ]
+  },
+  "workbookExercises": {
+    "audioFile": "audio/workbook/lesson-08-workbook-audio-1.mp3",
+    "sourceStatus": "official-answer-key-verified",
+    "listeningPart1": {
+      "type": "listening-true-false-image",
+      "sourceStatus": "official-workbook",
+      "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 76.",
+      "questions": [
+        {
+          "id": 1,
+          "image": "images/workbook/lesson08/listening-part1/q01.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 2,
+          "image": "images/workbook/lesson08/listening-part1/q02.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 3,
+          "image": "images/workbook/lesson08/listening-part1/q03.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 4,
+          "image": "images/workbook/lesson08/listening-part1/q04.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 5,
+          "image": "images/workbook/lesson08/listening-part1/q05.png",
+          "imageSource": "official-workbook",
+          "answer": false
+        }
       ]
     },
-    grammarPractice: [
-      { type: "choice", prompt: "Chọn câu đề nghị đúng.", options: ["晚上去看电影，好吗？", "好吗晚上去看电影？", "晚上好吗去看电影？"], answer: "晚上去看电影，好吗？", explain: "好吗 đặt cuối mệnh đề đề xuất.", source: "book", grammarId: "g1" },
-      { type: "fill", prompt: "我们一起去吃饭，（ ）？", answer: "好吗", explain: "Dùng 好吗 để hỏi ý kiến.", source: "book", grammarId: "g1" },
-      { type: "choice", prompt: "Chọn câu dùng 再 đúng.", options: ["你明天再给我打电话吧。", "你再明天给我打电话吧。", "你给我再明天打电话吧。"], answer: "你明天再给我打电话吧。", explain: "再 đứng trước động từ 给/打电话.", source: "book", grammarId: "g2" },
-      { type: "order", prompt: "Sắp xếp thành câu đúng.", pieces: ["让", "我", "想想", "再", "告诉", "你"], answer: "让我想想再告诉你", explain: "再 đặt trước 告诉 để nói làm sau.", source: "book", grammarId: "g2" },
-      { type: "fill", prompt: "王老师（ ）我给张朋打个电话。", answer: "让", explain: "让 + người + làm việc gì.", source: "book", grammarId: "g3" },
-      { type: "choice", prompt: "Chọn câu kiêm ngữ đúng.", options: ["我请你吃饭。", "我请吃饭你。", "我你请吃饭。"], answer: "我请你吃饭。", explain: "你 vừa là tân ngữ của 请 vừa thực hiện 吃饭.", source: "book", grammarId: "g3" },
-      { type: "fill", prompt: "你再（ ）这本书吧。", answer: "看看", explain: "看 lặp lại thành 看看 để nói xem thử/xem một chút.", source: "book", grammarId: "g4" },
-      { type: "choice", prompt: "Chọn dạng lặp đúng của 准备.", options: ["准备准备", "准准备备", "准备一准备备"], answer: "准备准备", explain: "Động từ song âm tiết AB lặp thành ABAB.", source: "book", grammarId: "g4" }
+    "imageSets": {
+      "listeningPart2": {
+        "sourceStatus": "official-workbook",
+        "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 77.",
+        "images": [
+          {
+            "id": "A",
+            "src": "images/workbook/lesson08/listening-part2/a.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "B",
+            "src": "images/workbook/lesson08/listening-part2/b.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "C",
+            "src": "images/workbook/lesson08/listening-part2/c.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "D",
+            "src": "images/workbook/lesson08/listening-part2/d.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "E",
+            "src": "images/workbook/lesson08/listening-part2/e.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "F",
+            "src": "images/workbook/lesson08/listening-part2/f.png",
+            "imageSource": "official-workbook"
+          }
+        ]
+      },
+      "readingPart1": {
+        "sourceStatus": "official-workbook",
+        "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 79.",
+        "images": [
+          {
+            "id": "A",
+            "src": "images/workbook/lesson08/reading-part1/a.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "B",
+            "src": "images/workbook/lesson08/reading-part1/b.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "C",
+            "src": "images/workbook/lesson08/reading-part1/c.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "D",
+            "src": "images/workbook/lesson08/reading-part1/d.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "E",
+            "src": "images/workbook/lesson08/reading-part1/e.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "F",
+            "src": "images/workbook/lesson08/reading-part1/f.png",
+            "imageSource": "official-workbook"
+          }
+        ]
+      }
+    },
+    "listeningPart2": [
+      {
+        "id": 6,
+        "question": "Câu 6",
+        "answer": "A"
+      },
+      {
+        "id": 7,
+        "question": "Câu 7",
+        "answer": "E"
+      },
+      {
+        "id": 8,
+        "question": "Câu 8",
+        "answer": "F"
+      },
+      {
+        "id": 9,
+        "question": "Câu 9",
+        "answer": "B"
+      },
+      {
+        "id": 10,
+        "question": "Câu 10",
+        "answer": "C"
+      }
     ],
-    shortPractice: [
-      { type: "choice", prompt: "“Nhân viên phục vụ” là từ nào?", options: ["服务员", "事情", "告诉", "找"], answer: "服务员", source: "book" },
-      { type: "fill", prompt: "王老师（ ）我告诉你。", answer: "让", source: "book" },
-      { type: "order", prompt: "Sắp xếp câu.", pieces: ["让我", "想想", "再", "告诉", "你"], answer: "让我想想再告诉你", source: "book" },
-      { type: "choice", prompt: "Chọn nghĩa đúng của 贵.", options: ["Đắt", "Trắng", "Đen", "Đợi"], answer: "Đắt", source: "book" }
+    "listeningPart3": [
+      {
+        "id": 11,
+        "question": "Câu 11",
+        "options": [
+          "A 手机",
+          "B 手表",
+          "C 自行车"
+        ],
+        "answer": "A"
+      },
+      {
+        "id": 12,
+        "question": "Câu 12",
+        "options": [
+          "A 想唱歌",
+          "B 想看电影",
+          "C 想看电视"
+        ],
+        "answer": "B"
+      },
+      {
+        "id": 13,
+        "question": "Câu 13",
+        "options": [
+          "A 踢足球",
+          "B 跑步",
+          "C 打篮球"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 14,
+        "question": "Câu 14",
+        "options": [
+          "A 老师",
+          "B 医生",
+          "C 服务员"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 15,
+        "question": "Câu 15",
+        "options": [
+          "A 都不好",
+          "B 黑的",
+          "C 白的"
+        ],
+        "answer": "A"
+      }
     ],
-    workbook: [
-      { id: "wb-read-21-25", title: "Sách bài tập - Đọc Phần 2, Câu 21-25", source: "book", type: "fillChoice", choices: [
-        { key: "A", text: "等" }, { key: "B", text: "让" }, { key: "C", text: "再" }, { key: "D", text: "事情" }, { key: "E", text: "贵" }, { key: "F", text: "找" }
-      ], questions: [
-        { id: "21", prompt: "我这个星期太忙了，下个星期再（ ）时间一起去看电影吧。", answer: "F" },
-        { id: "22", prompt: "张老师在上课呢，他让你（ ）一会儿。", answer: "A" },
-        { id: "23", prompt: "王老师（ ）我告诉你，明天 he 有事，不能来上课了。", answer: "B", explain: "Nguồn có chữ “he”; giữ nguyên câu nguồn." },
-        { id: "24", prompt: "大卫今天不在家，你明天（ ）给他打电话吧。", answer: "C" },
-        { id: "25", prompt: "请问，你找服务员有什么（ ）？", answer: "D" }
-      ] },
-      { id: "wb-judge-26-30", title: "Sách bài tập - Đọc Phần 3, Câu 26-30", source: "book", type: "trueFalse", questions: [
-        { id: "26", original: "王老师让我给大卫打个电话。", prompt: "王老师给大卫打电话。", answer: "x", explain: "Sai, thầy Vương bảo tôi gọi." },
-        { id: "27", original: "今天下午我没时间，明天再去看电影吧。", prompt: "今天不能去看电影。", answer: "√", explain: "Đúng." },
-        { id: "28", original: "这件白的有点儿长，那件黑的有点儿贵。", prompt: "两件衣服，我都不喜欢。", answer: "x", explain: "Sai, câu gốc chỉ mô tả áo trắng hơi dài, áo đen hơi đắt." },
-        { id: "29", original: "今天天气不太好，等天气好的时候再给你买自行车吧。", prompt: "外面正在下雨。", answer: "x", explain: "Sai, thời tiết không tốt không chắc là đang mưa." },
-        { id: "30", original: "你看，这是我们家的猫，眼睛漂亮吧？是我姐姐送给我的。", prompt: "猫不是我家 de。", answer: "x", explain: "Sai, nguồn nói 这是我们家的猫; câu nguồn có chữ “de”." }
-      ] },
-      { id: "wb-match-31-35", title: "Sách bài tập - Đọc Phần 4, Câu 31-35", source: "book", type: "matchChoice", choices: [
-        { key: "A", text: "这件白的有点儿长，这件黑的我也不太喜欢，我再看看吧。" }, { key: "B", text: "服务员，我想 要点儿 热水。" }, { key: "C", text: "明天要考试，考试后再去看吧。" }, { key: "D", text: "让我 想想 再 告诉你。" }, { key: "E", text: "他在哪儿呢？你看见 he/tā 了吗？（例）" }, { key: "F", text: "听说他生病了，我想去医院看看他。" }
-      ], questions: [
-        { id: "31", prompt: "你想看什么电影？", answer: "D" },
-        { id: "32", prompt: "你找大卫有什么事情吗？", answer: "F" },
-        { id: "33", prompt: "这些都是今天新来的衣服。", answer: "A" },
-        { id: "34", prompt: "好的，请问您住哪个房间？", answer: "B" },
-        { id: "35", prompt: "晚上去看电影，好吗？", answer: "C" }
-      ] }
+    "readingPart1": [
+      {
+        "id": 16,
+        "text": "我今天很忙，没时间看电影。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "E"
+      },
+      {
+        "id": 17,
+        "text": "外面天气很好，我们一起去运动运动吧。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "A"
+      },
+      {
+        "id": 18,
+        "text": "王老师让我给张朋打个电话。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "F"
+      },
+      {
+        "id": 19,
+        "text": "妈妈生病了，我们去医院看看她吧。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 20,
+        "text": "小王告诉我，这个商店的东西有点儿贵。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "B"
+      }
     ],
-    workbookReference: [
-      { title: "Sách bài tập - Nghe Phần 1, Câu 1-5", source: "book", note: "HSK2.md chỉ có mô tả hình, không có script/audio/đáp án gốc nên chưa tự chấm.", lines: ["Hình 1: Áo thun trắng và đen.", "Hình 2: Tủ quần áo.", "Hình 3: Cánh cổng sắt.", "Hình 4: Người nói thầm.", "Hình 5: Nữ nhân viên công sở."] },
-      { title: "Sách bài tập - Nghe Phần 2, Câu 6-10", source: "book", note: "Thiếu script/audio/đáp án gốc.", lines: ["Hình A: Người đàn ông nghe điện thoại.", "Hình B: Tay nắm cửa có chìa khóa.", "Hình C: Sách “CHANGES AHEAD!”.", "Hình D: Nam thanh niên đá bóng (ví dụ).", "Hình E: Hai cô gái trò chuyện.", "Hình F: Người đàn ông lau mũi."] },
-      { title: "Sách bài tập - Nghe Phần 3, Câu 11-15", source: "book", note: "Có lựa chọn nhưng thiếu script/audio/đáp án gốc.", lines: ["11. A 手机 | B 手表 | C 自行车", "12. A 想唱歌 | B 想看电影 | C 想看电视", "13. A 踢足球 | B 跑步 | C 打篮球", "14. A 老师 | B 医生 | C 服务员", "15. A 都不好 | B 黑的 | C 白的"] },
-      { title: "Sách bài tập - Đọc Phần 1, Câu 16-20", source: "book", note: "Phần này phụ thuộc hình ảnh, project chưa có bộ hình gốc nên để tham khảo.", lines: ["16. 我今天很忙，没时间看电影。", "17. 外面天气很好，我们一起去运动运动吧。", "18. 王老师让我给张朋打个电话。", "19. 妈妈生病了，我们去医院看看她吧。", "20. 小王告诉我，这个商店的东西有点儿贵。"] }
+    "readingPart2": {
+      "options": [
+        {
+          "key": "A",
+          "word": "等"
+        },
+        {
+          "key": "B",
+          "word": "让"
+        },
+        {
+          "key": "C",
+          "word": "再"
+        },
+        {
+          "key": "D",
+          "word": "事情"
+        },
+        {
+          "key": "E",
+          "word": "贵"
+        },
+        {
+          "key": "F",
+          "word": "找"
+        }
+      ],
+      "questions": [
+        {
+          "id": 21,
+          "text": "我这个星期太忙了，下个星期再（ ）时间一起去看电影吧。",
+          "answer": "F"
+        },
+        {
+          "id": 22,
+          "text": "张老师在上课呢，他让你（ ）一会儿。",
+          "answer": "A"
+        },
+        {
+          "id": 23,
+          "text": "王老师（ ）我告诉你，明天他有事，不能来上课了。",
+          "answer": "B"
+        },
+        {
+          "id": 24,
+          "text": "大卫今天不在家，你明天（ ）给他打电话吧。",
+          "answer": "C"
+        },
+        {
+          "id": 25,
+          "text": "请问，你找服务员有什么（ ）？",
+          "answer": "D"
+        }
+      ]
+    },
+    "readingPart3": [
+      {
+        "id": 26,
+        "text": "王老师让我给大卫打个电话。",
+        "statement": "王老师给大卫打电话。",
+        "answer": false,
+        "explanation": "Sai, thầy Vương bảo tôi gọi."
+      },
+      {
+        "id": 27,
+        "text": "今天下午我没时间，明天再去看电影吧。",
+        "statement": "今天不能去看电影。",
+        "answer": true,
+        "explanation": "Đúng."
+      },
+      {
+        "id": 28,
+        "text": "这件白的有点儿长，那件黑的有点儿贵。",
+        "statement": "两件衣服，我都不喜欢。",
+        "answer": true,
+        "explanation": "Sai, câu gốc chỉ mô tả áo trắng hơi dài, áo đen hơi đắt."
+      },
+      {
+        "id": 29,
+        "text": "今天天气不太好，等天气好的时候再给你买自行车吧。",
+        "statement": "外面正在下雨。",
+        "answer": false,
+        "explanation": "Sai, thời tiết không tốt không chắc là đang mưa."
+      },
+      {
+        "id": 30,
+        "text": "你看，这是我们家的猫，眼睛漂亮吧？是我姐姐送给我的。",
+        "statement": "猫不是我家的。",
+        "answer": false,
+        "explanation": "Sai, nguồn nói 这是我们家的猫; câu nguồn có chữ “de”."
+      }
     ],
-    supplementalHomework: [
-      { type: "choice", prompt: "晚上去看电影，好吗？", options: ["好。", "不远。", "一米七。"], answer: "好。", explain: "好吗 dùng để hỏi ý kiến về đề xuất.", source: "ai" },
-      { type: "fill", prompt: "让我想想（ ）告诉你。", answer: "再", explain: "再 + động từ nói hành động làm sau.", source: "ai" },
-      { type: "translate", prompt: "Dịch sang tiếng Trung: Thầy Vương bảo tôi gọi điện cho Trương Bằng.", answer: "王老师让我给张朋打个电话。", explain: "让 + 我 + 给张朋打电话.", source: "ai" }
+    "readingPart4": {
+      "options": [
+        {
+          "key": "A",
+          "text": "这件白的有点儿长，这件黑的我也不太喜欢，我再看看吧。"
+        },
+        {
+          "key": "B",
+          "text": "服务员，我想 要点儿 热水。"
+        },
+        {
+          "key": "C",
+          "text": "明天要考试，考试后再去看吧。"
+        },
+        {
+          "key": "D",
+          "text": "让我 想想 再 告诉你。"
+        },
+        {
+          "key": "E",
+          "text": "他在哪儿呢？你看见 他 了吗？（例）"
+        },
+        {
+          "key": "F",
+          "text": "听说他生病了，我想去医院看看他。"
+        }
+      ],
+      "questions": [
+        {
+          "id": 31,
+          "text": "你想看什么电影？",
+          "answer": "D"
+        },
+        {
+          "id": 32,
+          "text": "你找大卫有什么事情吗？",
+          "answer": "F"
+        },
+        {
+          "id": 33,
+          "text": "这些都是今天新来的衣服。",
+          "answer": "A"
+        },
+        {
+          "id": 34,
+          "text": "好的，请问您住哪个房间？",
+          "answer": "B"
+        },
+        {
+          "id": 35,
+          "text": "晚上去看电影，好吗？",
+          "answer": "C"
+        }
+      ]
+    }
+  },
+  "migrationAudit": {
+    "officialAnswersSource": "HSK2 Đáp án sách bài tập.pdf",
+    "officialImagesSource": "HSK 2 Sách bài tập.pdf",
+    "audioSource": "audio/workbook",
+    "cleanedSourceArtifacts": [
+      "Mixed English tokens in old source were normalized where official text was clear."
     ],
-    listeningHomework: [
-      { id: "listen-ai-1", title: "Nghe chọn đáp án", source: "ai", script: "女：你想看什么电影？\n男：让我想想再告诉你。", prompt: "男的什么时候告诉女的？", options: ["想想以后", "现在", "昨天"], answer: "想想以后", explain: "Script nói 想想再告诉你。" },
-      { id: "listen-ai-2", title: "Nghe đúng/sai", source: "ai", script: "王老师让我给张朋打个电话。", prompt: "王老师自己给张朋打电话。", options: ["√", "x"], answer: "x", explain: "Script nói 让我打电话." },
-      { id: "listen-ai-3", title: "Nghe điền từ", source: "ai", script: "张老师让你等一会儿。", prompt: "张老师让你（ ）一会儿。", answer: "等", explain: "Từ cần điền là 等." },
-      { id: "listen-ai-4", title: "Nghe hội thoại và trả lời", source: "ai", script: "女：这件白的怎么样？\n男：这件白的有点儿长。", prompt: "白的怎么样？", options: ["有点儿长", "有点儿贵", "很好吃"], answer: "有点儿长", explain: "Script nói 白的有点儿长。" }
-    ]
-  };
-  const index = window.HSK2_DATA.lessons.findIndex((item) => item.id === lesson.id);
-  if (index >= 0) window.HSK2_DATA.lessons[index] = lesson;
-})();
+    "needsVerification": []
+  }
+};
+
+window.lesson08Data = lesson08Data;

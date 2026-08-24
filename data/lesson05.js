@@ -1,118 +1,998 @@
-(function () {
-  const lesson = {
-    id: "lesson05",
-    order: 5,
-    type: "lesson",
-    status: "ready",
-    title: "就买这件吧",
-    viTitle: "Mua chiếc áo này đi",
-    scope: "Bài 5",
-    sourceRange: "HSK2.md: sách giáo trình Bài 5 và sách bài tập Bài 5",
-    vocabulary: [
-      { hanzi: "外面", pinyin: "wàimiàn", pos: "Danh từ", meaning: "Bên ngoài", example: "我们就去外面吃饭吧。", examplePinyin: "Wǒmen jiù qù wàimiàn chīfàn ba.", exampleVi: "Chúng ta ra ngoài ăn cơm đi.", source: "book" },
-      { hanzi: "准备", pinyin: "zhǔnbèi", pos: "Động từ", meaning: "Định, dự định", example: "明天再准备吧。", examplePinyin: "Míngtiān zài zhǔnbèi ba.", exampleVi: "Ngày mai hãy chuẩn bị.", source: "book" },
-      { hanzi: "就", pinyin: "jiù", pos: "Phó từ", meaning: "Chỉ kết luận hay sự kiện quyết định", example: "你喜欢就买吧。", examplePinyin: "Nǐ xǐhuan jiù mǎi ba.", exampleVi: "Bạn thích thì mua đi.", source: "book" },
-      { hanzi: "鱼", pinyin: "yú", pos: "Danh từ", meaning: "Cá, món cá", example: "我会做鱼。", examplePinyin: "Wǒ huì zuò yú.", exampleVi: "Tôi biết làm món cá.", source: "book" },
-      { hanzi: "吧", pinyin: "ba", pos: "Trợ từ", meaning: "Dùng cuối câu để thương lượng, đề nghị, thỉnh cầu hay mệnh lệnh", example: "你去买一点儿水果吧。", examplePinyin: "Nǐ qù mǎi yìdiǎnr shuǐguǒ ba.", exampleVi: "Bạn đi mua một ít hoa quả nhé.", source: "book" },
-      { hanzi: "件", pinyin: "jiàn", pos: "Lượng từ", meaning: "Cái, chiếc; dùng cho áo", example: "这件衣服有点儿大。", examplePinyin: "Zhè jiàn yīfu yǒudiǎnr dà.", exampleVi: "Chiếc áo này hơi rộng.", source: "book" },
-      { hanzi: "还", pinyin: "hái", pos: "Phó từ", meaning: "Cũng, khá", example: "今天的菜还可以。", examplePinyin: "Jīntiān de cài hái kěyǐ.", exampleVi: "Món ăn hôm nay cũng được.", source: "book" },
-      { hanzi: "可以", pinyin: "kěyǐ", pos: "Tính từ", meaning: "Không tệ, tạm được", example: "听和说还可以。", examplePinyin: "Tīng hé shuō hái kěyǐ.", exampleVi: "Nghe và nói thì tạm được.", source: "book" },
-      { hanzi: "不错", pinyin: "búcuò", pos: "Tính từ", meaning: "Tuyệt, khá tốt", example: "我觉得还不错。", examplePinyin: "Wǒ juéde hái búcuò.", exampleVi: "Tôi thấy cũng khá tốt.", source: "book" },
-      { hanzi: "考试", pinyin: "kǎoshì", pos: "Danh từ", meaning: "Cuộc thi, bài kiểm tra", example: "我下午四点考试。", examplePinyin: "Wǒ xiàwǔ sì diǎn kǎoshì.", exampleVi: "Chiều nay 4 giờ tôi thi.", source: "book" },
-      { hanzi: "意思", pinyin: "yìsi", pos: "Danh từ", meaning: "Nghĩa, ý nghĩa", example: "这个意思我知道。", examplePinyin: "Zhège yìsi wǒ zhīdào.", exampleVi: "Ý nghĩa này tôi biết.", source: "ai" },
-      { hanzi: "咖啡", pinyin: "kāfēi", pos: "Danh từ", meaning: "Cà phê", example: "我中午喝了两杯咖啡。", examplePinyin: "Wǒ zhōngwǔ hē le liǎng bēi kāfēi.", exampleVi: "Buổi trưa tôi đã uống hai cốc cà phê.", source: "book" },
-      { hanzi: "对", pinyin: "duì", pos: "Giới từ", meaning: "Đối với, cho", example: "运动对身体很好。", examplePinyin: "Yùndòng duì shēntǐ hěn hǎo.", exampleVi: "Vận động rất tốt cho sức khỏe.", source: "book" },
-      { hanzi: "以后", pinyin: "yǐhòu", pos: "Danh từ", meaning: "Sau này, sau khi", example: "考试以后给你打电话。", examplePinyin: "Kǎoshì yǐhòu gěi nǐ dǎ diànhuà.", exampleVi: "Thi xong tôi sẽ gọi điện cho bạn.", source: "book" }
-    ],
-    grammar: [
-      { id: "g1", title: "Phó từ 就", structure: "Hoàn cảnh/điều kiện, 就 + động từ", explanation: "Dùng để đưa ra kết luận hoặc cách xử lý dựa trên điều vừa nói.", examples: [
-        { zh: "你不想去，就在家休息吧。", pinyin: "Nǐ bù xiǎng qù, jiù zài jiā xiūxi ba.", vi: "Bạn không muốn đi thì ở nhà nghỉ ngơi đi." },
-        { zh: "这儿的咖啡不错，就喝咖啡吧。", pinyin: "Zhèr de kāfēi búcuò, jiù hē kāfēi ba.", vi: "Cà phê ở đây ngon đấy, thì uống cà phê đi." },
-        { zh: "就做你爱吃的鱼吧。", pinyin: "Jiù zuò nǐ ài chī de yú ba.", vi: "Thì làm món cá mà anh thích ăn nhé." }
-      ], source: "book" },
-      { id: "g2", title: "还 + tính từ", structure: "还 + tính từ", explanation: "Nói trạng thái ở mức tạm được, tạm ổn, chấp nhận được.", examples: [
-        { zh: "还好。", pinyin: "Hái hǎo.", vi: "Cũng tạm ổn." },
-        { zh: "还行，不太大。", pinyin: "Hái xíng, bú tài dà.", vi: "Cũng tạm, không rộng lắm." },
-        { zh: "我觉得听和说还可以。", pinyin: "Wǒ juéde tīng hé shuō hái kěyǐ.", vi: "Tôi thấy nghe và nói tạm được." }
-      ], source: "book" },
-      { id: "g3", title: "有点儿 + tính từ/động từ", structure: "有点儿 + tính từ / động từ", explanation: "Diễn tả mức độ nhẹ, thường mang sắc thái tiêu cực hoặc không hài lòng.", examples: [
-        { zh: "今天天气有点儿冷。", pinyin: "Jīntiān tiānqì yǒudiǎnr lěng.", vi: "Thời tiết hôm nay hơi lạnh." },
-        { zh: "我昨天有点儿累。", pinyin: "Wǒ zuótiān yǒudiǎnr lèi.", vi: "Hôm qua tôi hơi mệt." },
-        { zh: "这件衣服有点儿大。", pinyin: "Zhè jiàn yīfu yǒudiǎnr dà.", vi: "Chiếc áo này hơi rộng." }
-      ], source: "book" }
-    ],
-    vocabGames: {
-      fillSentences: [
-        { prompt: "你喜欢（ ）买吧。", answer: "就", hint: "thì/liền", source: "book" },
-        { prompt: "今天的菜（ ）可以。", answer: "还", hint: "cũng/tạm", source: "book" },
-        { prompt: "我下午四点（ ）。", answer: "考试", hint: "thi", source: "book" },
-        { prompt: "运动（ ）身体很好。", answer: "对", hint: "đối với", source: "book" }
+/**
+ * Data Schema for HSK2 Standard Course - Lesson 05
+ * Source: Giáo trình Chuẩn HSK 2 & Sách Bài Tập HSK 2 (migrated, official workbook answers verified)
+ */
+
+const lesson05Data = {
+  "lessonInfo": {
+    "id": 5,
+    "titleZH": "就买这件吧",
+    "titleVI": "Mua chiếc áo này đi",
+    "audioMain": "audio/lesson05/01-1.mp3",
+    "audioPronunciation": "audio/lesson05/01-2.mp3",
+    "sourceStatus": "MIGRATED_FROM_OLD_SCHEMA"
+  },
+  "vocabulary": [
+    {
+      "id": 1,
+      "hanzi": "外面",
+      "pinyin": "wàimiàn",
+      "wordType": "Danh từ",
+      "meaning": "Bên ngoài",
+      "exampleZH": "我们就去外面吃饭吧。",
+      "examplePinyin": "Wǒmen jiù qù wàimiàn chīfàn ba.",
+      "exampleVI": "Chúng ta ra ngoài ăn cơm đi.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 2,
+      "hanzi": "准备",
+      "pinyin": "zhǔnbèi",
+      "wordType": "Động từ",
+      "meaning": "Định, dự định",
+      "exampleZH": "明天再准备吧。",
+      "examplePinyin": "Míngtiān zài zhǔnbèi ba.",
+      "exampleVI": "Ngày mai hãy chuẩn bị.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 3,
+      "hanzi": "就",
+      "pinyin": "jiù",
+      "wordType": "Phó từ",
+      "meaning": "Chỉ kết luận hay sự kiện quyết định",
+      "exampleZH": "你喜欢就买吧。",
+      "examplePinyin": "Nǐ xǐhuan jiù mǎi ba.",
+      "exampleVI": "Bạn thích thì mua đi.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 4,
+      "hanzi": "鱼",
+      "pinyin": "yú",
+      "wordType": "Danh từ",
+      "meaning": "Cá, món cá",
+      "exampleZH": "我会做鱼。",
+      "examplePinyin": "Wǒ huì zuò yú.",
+      "exampleVI": "Tôi biết làm món cá.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 5,
+      "hanzi": "吧",
+      "pinyin": "ba",
+      "wordType": "Trợ từ",
+      "meaning": "Dùng cuối câu để thương lượng, đề nghị, thỉnh cầu hay mệnh lệnh",
+      "exampleZH": "你去买一点儿水果吧。",
+      "examplePinyin": "Nǐ qù mǎi yìdiǎnr shuǐguǒ ba.",
+      "exampleVI": "Bạn đi mua một ít hoa quả nhé.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 6,
+      "hanzi": "件",
+      "pinyin": "jiàn",
+      "wordType": "Lượng từ",
+      "meaning": "Cái, chiếc; dùng cho áo",
+      "exampleZH": "这件衣服有点儿大。",
+      "examplePinyin": "Zhè jiàn yīfu yǒudiǎnr dà.",
+      "exampleVI": "Chiếc áo này hơi rộng.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 7,
+      "hanzi": "还",
+      "pinyin": "hái",
+      "wordType": "Phó từ",
+      "meaning": "Cũng, khá",
+      "exampleZH": "今天的菜还可以。",
+      "examplePinyin": "Jīntiān de cài hái kěyǐ.",
+      "exampleVI": "Món ăn hôm nay cũng được.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 8,
+      "hanzi": "可以",
+      "pinyin": "kěyǐ",
+      "wordType": "Tính từ",
+      "meaning": "Không tệ, tạm được",
+      "exampleZH": "听和说还可以。",
+      "examplePinyin": "Tīng hé shuō hái kěyǐ.",
+      "exampleVI": "Nghe và nói thì tạm được.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 9,
+      "hanzi": "不错",
+      "pinyin": "búcuò",
+      "wordType": "Tính từ",
+      "meaning": "Tuyệt, khá tốt",
+      "exampleZH": "我觉得还不错。",
+      "examplePinyin": "Wǒ juéde hái búcuò.",
+      "exampleVI": "Tôi thấy cũng khá tốt.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 10,
+      "hanzi": "考试",
+      "pinyin": "kǎoshì",
+      "wordType": "Danh từ",
+      "meaning": "Cuộc thi, bài kiểm tra",
+      "exampleZH": "我下午四点考试。",
+      "examplePinyin": "Wǒ xiàwǔ sì diǎn kǎoshì.",
+      "exampleVI": "Chiều nay 4 giờ tôi thi.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 11,
+      "hanzi": "意思",
+      "pinyin": "yìsi",
+      "wordType": "Danh từ",
+      "meaning": "Nghĩa, ý nghĩa",
+      "exampleZH": "这个意思我知道。",
+      "examplePinyin": "Zhège yìsi wǒ zhīdào.",
+      "exampleVI": "Ý nghĩa này tôi biết.",
+      "sourceStatus": "NEEDS_VERIFICATION"
+    },
+    {
+      "id": 12,
+      "hanzi": "咖啡",
+      "pinyin": "kāfēi",
+      "wordType": "Danh từ",
+      "meaning": "Cà phê",
+      "exampleZH": "我中午喝了两杯咖啡。",
+      "examplePinyin": "Wǒ zhōngwǔ hē le liǎng bēi kāfēi.",
+      "exampleVI": "Buổi trưa tôi đã uống hai cốc cà phê.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 13,
+      "hanzi": "对",
+      "pinyin": "duì",
+      "wordType": "Giới từ",
+      "meaning": "Đối với, cho",
+      "exampleZH": "运动对身体很好。",
+      "examplePinyin": "Yùndòng duì shēntǐ hěn hǎo.",
+      "exampleVI": "Vận động rất tốt cho sức khỏe.",
+      "sourceStatus": "VERIFIED"
+    },
+    {
+      "id": 14,
+      "hanzi": "以后",
+      "pinyin": "yǐhòu",
+      "wordType": "Danh từ",
+      "meaning": "Sau này, sau khi",
+      "exampleZH": "考试以后给你打电话。",
+      "examplePinyin": "Kǎoshì yǐhòu gěi nǐ dǎ diànhuà.",
+      "exampleVI": "Thi xong tôi sẽ gọi điện cho bạn.",
+      "sourceStatus": "VERIFIED"
+    }
+  ],
+  "grammar": [
+    {
+      "id": 1,
+      "name": "Phó từ 就",
+      "formula": "Hoàn cảnh/điều kiện, 就 + động từ",
+      "explanation": "Dùng để đưa ra kết luận hoặc cách xử lý dựa trên điều vừa nói.",
+      "negativeForm": null,
+      "examples": [
+        {
+          "zh": "你不想去，就在家休息吧。",
+          "pinyin": "Nǐ bù xiǎng qù, jiù zài jiā xiūxi ba.",
+          "vi": "Bạn không muốn đi thì ở nhà nghỉ ngơi đi."
+        },
+        {
+          "zh": "这儿的咖啡不错，就喝咖啡吧。",
+          "pinyin": "Zhèr de kāfēi búcuò, jiù hē kāfēi ba.",
+          "vi": "Cà phê ở đây ngon đấy, thì uống cà phê đi."
+        },
+        {
+          "zh": "就做你爱吃的鱼吧。",
+          "pinyin": "Jiù zuò nǐ ài chī de yú ba.",
+          "vi": "Thì làm món cá mà anh thích ăn nhé."
+        }
       ],
-      listeningChoice: [
-        { script: "咖啡", prompt: "Nghe và chọn từ đúng", answer: "咖啡", options: ["咖啡", "考试", "以后", "外面"], source: "ai" },
-        { script: "鱼", prompt: "Nghe và chọn từ đúng", answer: "鱼", options: ["鱼", "吧", "件", "意思"], source: "ai" },
-        { script: "准备", prompt: "Nghe và chọn từ đúng", answer: "准备", options: ["准备", "不错", "可以", "对"], source: "ai" }
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "Chọn câu dùng 就 đúng.",
+        "options": [
+          "你喜欢就买吧。",
+          "你就喜欢买吧。",
+          "就你喜欢买吧。"
+        ],
+        "answer": "你喜欢就买吧。",
+        "explanation": "Điều kiện/hoàn cảnh trước, kết luận sau 就."
+      }
+    },
+    {
+      "id": 2,
+      "name": "还 + tính từ",
+      "formula": "还 + tính từ",
+      "explanation": "Nói trạng thái ở mức tạm được, tạm ổn, chấp nhận được.",
+      "negativeForm": null,
+      "examples": [
+        {
+          "zh": "还好。",
+          "pinyin": "Hái hǎo.",
+          "vi": "Cũng tạm ổn."
+        },
+        {
+          "zh": "还行，不太大。",
+          "pinyin": "Hái xíng, bú tài dà.",
+          "vi": "Cũng tạm, không rộng lắm."
+        },
+        {
+          "zh": "我觉得听和说还可以。",
+          "pinyin": "Wǒ juéde tīng hé shuō hái kěyǐ.",
+          "vi": "Tôi thấy nghe và nói tạm được."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": null
+    },
+    {
+      "id": 3,
+      "name": "有点儿 + tính từ/động từ",
+      "formula": "有点儿 + tính từ / động từ",
+      "explanation": "Diễn tả mức độ nhẹ, thường mang sắc thái tiêu cực hoặc không hài lòng.",
+      "negativeForm": null,
+      "examples": [
+        {
+          "zh": "今天天气有点儿冷。",
+          "pinyin": "Jīntiān tiānqì yǒudiǎnr lěng.",
+          "vi": "Thời tiết hôm nay hơi lạnh."
+        },
+        {
+          "zh": "我昨天有点儿累。",
+          "pinyin": "Wǒ zuótiān yǒudiǎnr lèi.",
+          "vi": "Hôm qua tôi hơi mệt."
+        },
+        {
+          "zh": "这件衣服有点儿大。",
+          "pinyin": "Zhè jiàn yīfu yǒudiǎnr dà.",
+          "vi": "Chiếc áo này hơi rộng."
+        }
+      ],
+      "sourceStatus": "VERIFIED",
+      "quickQuiz": {
+        "question": "Chọn câu đúng với 有点儿.",
+        "options": [
+          "这件衣服有点儿大。",
+          "这件衣服大有点儿。",
+          "有点儿这件衣服大。"
+        ],
+        "answer": "这件衣服有点儿大。",
+        "explanation": "有点儿 đứng trước tính từ 大."
+      }
+    }
+  ],
+  "vocabularyGames": {
+    "quizQuestions": [
+      {
+        "id": "q1",
+        "type": "hanzi-to-meaning",
+        "prompt": "外面",
+        "options": [
+          "Bên ngoài",
+          "Định, dự định",
+          "Chỉ kết luận hay sự kiện quyết định",
+          "Cá, món cá"
+        ],
+        "answer": "Bên ngoài",
+        "pinyin": "wàimiàn",
+        "meaning": "Bên ngoài",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q2",
+        "type": "meaning-to-hanzi",
+        "prompt": "Định, dự định",
+        "options": [
+          "准备",
+          "外面",
+          "就",
+          "鱼"
+        ],
+        "answer": "准备",
+        "pinyin": "zhǔnbèi",
+        "meaning": "Định, dự định",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q3",
+        "type": "hanzi-to-meaning",
+        "prompt": "就",
+        "options": [
+          "Chỉ kết luận hay sự kiện quyết định",
+          "Bên ngoài",
+          "Định, dự định",
+          "Cá, món cá"
+        ],
+        "answer": "Chỉ kết luận hay sự kiện quyết định",
+        "pinyin": "jiù",
+        "meaning": "Chỉ kết luận hay sự kiện quyết định",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "q4",
+        "type": "meaning-to-hanzi",
+        "prompt": "Cá, món cá",
+        "options": [
+          "鱼",
+          "外面",
+          "准备",
+          "就"
+        ],
+        "answer": "鱼",
+        "pinyin": "yú",
+        "meaning": "Cá, món cá",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "p1",
+        "type": "hanzi-to-pinyin",
+        "prompt": "吧",
+        "options": [
+          "ba",
+          "wàimiàn",
+          "zhǔnbèi",
+          "jiù"
+        ],
+        "answer": "ba",
+        "meaning": "Dùng cuối câu để thương lượng, đề nghị, thỉnh cầu hay mệnh lệnh",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "p2",
+        "type": "hanzi-to-pinyin",
+        "prompt": "件",
+        "options": [
+          "jiàn",
+          "wàimiàn",
+          "zhǔnbèi",
+          "jiù"
+        ],
+        "answer": "jiàn",
+        "meaning": "Cái, chiếc; dùng cho áo",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f1",
+        "type": "fill-blank",
+        "prompt": "你喜欢（ ）买吧。",
+        "options": [
+          "就",
+          "外面",
+          "准备",
+          "鱼"
+        ],
+        "answer": "就",
+        "translation": "Gợi ý: thì/liền",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f2",
+        "type": "fill-blank",
+        "prompt": "今天的菜（ ）可以。",
+        "options": [
+          "还",
+          "外面",
+          "准备",
+          "就"
+        ],
+        "answer": "还",
+        "translation": "Gợi ý: cũng/tạm",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f3",
+        "type": "fill-blank",
+        "prompt": "我下午四点（ ）。",
+        "options": [
+          "考试",
+          "外面",
+          "准备",
+          "就"
+        ],
+        "answer": "考试",
+        "translation": "Gợi ý: thi",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "f4",
+        "type": "fill-blank",
+        "prompt": "运动（ ）身体很好。",
+        "options": [
+          "对",
+          "外面",
+          "准备",
+          "就"
+        ],
+        "answer": "对",
+        "translation": "Gợi ý: đối với",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "s1",
+        "type": "meaning-to-hanzi",
+        "prompt": "“Cà phê” là từ nào?",
+        "options": [
+          "咖啡",
+          "考试",
+          "鱼",
+          "外面"
+        ],
+        "answer": "咖啡",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "s2",
+        "type": "fill-blank",
+        "prompt": "考试（ ）给你打电话。",
+        "options": [
+          "以后",
+          "外面",
+          "准备",
+          "就"
+        ],
+        "answer": "以后",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "s3",
+        "type": "sentence-scramble",
+        "prompt": "Sắp xếp câu.",
+        "words": [
+          "你",
+          "喜欢",
+          "就",
+          "买",
+          "吧"
+        ],
+        "answer": "你喜欢就买吧",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "s4",
+        "type": "meaning-to-hanzi",
+        "prompt": "Chọn nghĩa đúng của 不错.",
+        "options": [
+          "Khá tốt",
+          "Bên ngoài",
+          "Sau này",
+          "Ý nghĩa"
+        ],
+        "answer": "Khá tốt",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "g1",
+        "type": "meaning-to-hanzi",
+        "prompt": "Chọn câu dùng 就 đúng.",
+        "options": [
+          "你喜欢就买吧。",
+          "你就喜欢买吧。",
+          "就你喜欢买吧。"
+        ],
+        "answer": "你喜欢就买吧。",
+        "translation": "Điều kiện/hoàn cảnh trước, kết luận sau 就.",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "g2",
+        "type": "sentence-scramble",
+        "prompt": "Sắp xếp thành câu đúng.",
+        "words": [
+          "就",
+          "喝",
+          "咖啡",
+          "吧"
+        ],
+        "answer": "就喝咖啡吧",
+        "translation": "就 đứng trước động từ 喝.",
+        "sourceStatus": "VERIFIED"
+      },
+      {
+        "id": "g3",
+        "type": "fill-blank",
+        "prompt": "今天的菜（ ）可以。",
+        "options": [
+          "还",
+          "外面",
+          "准备",
+          "就"
+        ],
+        "answer": "还",
+        "translation": "还可以 nghĩa là cũng/tạm được.",
+        "sourceStatus": "VERIFIED"
+      }
+    ],
+    "matchingPairs": [
+      {
+        "id": "m1",
+        "zh": "外面",
+        "pinyin": "wàimiàn",
+        "vi": "Bên ngoài"
+      },
+      {
+        "id": "m2",
+        "zh": "准备",
+        "pinyin": "zhǔnbèi",
+        "vi": "Định, dự định"
+      },
+      {
+        "id": "m3",
+        "zh": "就",
+        "pinyin": "jiù",
+        "vi": "Chỉ kết luận hay sự kiện quyết định"
+      },
+      {
+        "id": "m4",
+        "zh": "鱼",
+        "pinyin": "yú",
+        "vi": "Cá, món cá"
+      },
+      {
+        "id": "m5",
+        "zh": "吧",
+        "pinyin": "ba",
+        "vi": "Dùng cuối câu để thương lượng, đề nghị, thỉnh cầu hay mệnh lệnh"
+      },
+      {
+        "id": "m6",
+        "zh": "件",
+        "pinyin": "jiàn",
+        "vi": "Cái, chiếc; dùng cho áo"
+      },
+      {
+        "id": "m7",
+        "zh": "还",
+        "pinyin": "hái",
+        "vi": "Cũng, khá"
+      },
+      {
+        "id": "m8",
+        "zh": "可以",
+        "pinyin": "kěyǐ",
+        "vi": "Không tệ, tạm được"
+      }
+    ]
+  },
+  "workbookExercises": {
+    "audioFile": "audio/workbook/lesson-05-workbook-audio-1.mp3",
+    "sourceStatus": "official-answer-key-verified",
+    "listeningPart1": {
+      "type": "listening-true-false-image",
+      "sourceStatus": "official-workbook",
+      "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 47.",
+      "questions": [
+        {
+          "id": 1,
+          "image": "images/workbook/lesson05/listening-part1/q01.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 2,
+          "image": "images/workbook/lesson05/listening-part1/q02.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        },
+        {
+          "id": 3,
+          "image": "images/workbook/lesson05/listening-part1/q03.png",
+          "imageSource": "official-workbook",
+          "answer": false
+        },
+        {
+          "id": 4,
+          "image": "images/workbook/lesson05/listening-part1/q04.png",
+          "imageSource": "official-workbook",
+          "answer": false
+        },
+        {
+          "id": 5,
+          "image": "images/workbook/lesson05/listening-part1/q05.png",
+          "imageSource": "official-workbook",
+          "answer": true
+        }
       ]
     },
-    grammarPractice: [
-      { type: "choice", prompt: "Chọn câu dùng 就 đúng.", options: ["你喜欢就买吧。", "你就喜欢买吧。", "就你喜欢买吧。"], answer: "你喜欢就买吧。", explain: "Điều kiện/hoàn cảnh trước, kết luận sau 就.", source: "book", grammarId: "g1" },
-      { type: "order", prompt: "Sắp xếp thành câu đúng.", pieces: ["就", "喝", "咖啡", "吧"], answer: "就喝咖啡吧", explain: "就 đứng trước động từ 喝.", source: "book", grammarId: "g1" },
-      { type: "fill", prompt: "今天的菜（ ）可以。", answer: "还", explain: "还可以 nghĩa là cũng/tạm được.", source: "book", grammarId: "g2" },
-      { type: "choice", prompt: "Chọn câu nói “cũng khá tốt”.", options: ["还不错。", "不错还。", "还不太不错。"], answer: "还不错。", explain: "还 + tính từ.", source: "ai", grammarId: "g2" },
-      { type: "fill", prompt: "我中午（ ）累。", answer: "有点儿", explain: "有点儿 + tính từ, thường nói hơi không thoải mái.", source: "book", grammarId: "g3" },
-      { type: "choice", prompt: "Chọn câu đúng với 有点儿.", options: ["这件衣服有点儿大。", "这件衣服大有点儿。", "有点儿这件衣服大。"], answer: "这件衣服有点儿大。", explain: "有点儿 đứng trước tính từ 大.", source: "book", grammarId: "g3" }
+    "imageSets": {
+      "listeningPart2": {
+        "sourceStatus": "official-workbook",
+        "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 48.",
+        "images": [
+          {
+            "id": "A",
+            "src": "images/workbook/lesson05/listening-part2/a.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "B",
+            "src": "images/workbook/lesson05/listening-part2/b.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "C",
+            "src": "images/workbook/lesson05/listening-part2/c.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "D",
+            "src": "images/workbook/lesson05/listening-part2/d.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "E",
+            "src": "images/workbook/lesson05/listening-part2/e.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "F",
+            "src": "images/workbook/lesson05/listening-part2/f.png",
+            "imageSource": "official-workbook"
+          }
+        ]
+      },
+      "readingPart1": {
+        "sourceStatus": "official-workbook",
+        "sourceNote": "Ảnh gốc được crop từ HSK 2 Sách bài tập.pdf, PDF page 50.",
+        "images": [
+          {
+            "id": "A",
+            "src": "images/workbook/lesson05/reading-part1/a.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "B",
+            "src": "images/workbook/lesson05/reading-part1/b.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "C",
+            "src": "images/workbook/lesson05/reading-part1/c.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "D",
+            "src": "images/workbook/lesson05/reading-part1/d.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "E",
+            "src": "images/workbook/lesson05/reading-part1/e.png",
+            "imageSource": "official-workbook"
+          },
+          {
+            "id": "F",
+            "src": "images/workbook/lesson05/reading-part1/f.png",
+            "imageSource": "official-workbook"
+          }
+        ]
+      }
+    },
+    "listeningPart2": [
+      {
+        "id": 6,
+        "question": "Câu 6",
+        "transcript": "男：今天晚上你想吃什么？ 女：我们在家吃吧，就做你爱吃的。",
+        "answer": "B"
+      },
+      {
+        "id": 7,
+        "question": "Câu 7",
+        "transcript": "男：你想不想去看电影？ 女：我有点儿累，在家看电视吧。",
+        "answer": "A"
+      },
+      {
+        "id": 8,
+        "question": "Câu 8",
+        "transcript": "男：你和小明在做什么呢？ 女：我们在准备明天的考试呢。",
+        "answer": "C"
+      },
+      {
+        "id": 9,
+        "question": "Câu 9",
+        "transcript": "女：医生说每天喝咖啡对身体不好。 男：以后我不喝咖啡了，喝茶。",
+        "answer": "F"
+      },
+      {
+        "id": 10,
+        "question": "Câu 10",
+        "transcript": "女：你看看，这件衣服怎么样？ 男：我觉得有点儿大，那件还不错。",
+        "answer": "E"
+      }
     ],
-    shortPractice: [
-      { type: "choice", prompt: "“Cà phê” là từ nào?", options: ["咖啡", "考试", "鱼", "外面"], answer: "咖啡", source: "book" },
-      { type: "fill", prompt: "考试（ ）给你打电话。", answer: "以后", source: "book" },
-      { type: "order", prompt: "Sắp xếp câu.", pieces: ["你", "喜欢", "就", "买", "吧"], answer: "你喜欢就买吧", source: "book" },
-      { type: "choice", prompt: "Chọn nghĩa đúng của 不错.", options: ["Khá tốt", "Bên ngoài", "Sau này", "Ý nghĩa"], answer: "Khá tốt", source: "book" }
+    "listeningPart3": [
+      {
+        "id": 11,
+        "question": "Câu 11",
+        "options": [
+          "A 外面",
+          "B 咖啡馆",
+          "C 书店"
+        ],
+        "answer": "B"
+      },
+      {
+        "id": 12,
+        "question": "Câu 12",
+        "options": [
+          "A 鱼",
+          "B 都爱吃",
+          "C 晚饭"
+        ],
+        "answer": "A"
+      },
+      {
+        "id": 13,
+        "question": "Câu 13",
+        "options": [
+          "A 他儿子不喜欢",
+          "B 椅子有点儿高",
+          "C 一百块钱"
+        ],
+        "answer": "B"
+      },
+      {
+        "id": 14,
+        "question": "Câu 14",
+        "options": [
+          "A 读和写还不错",
+          "B 说和写还不错",
+          "C 听和说还不错"
+        ],
+        "answer": "C"
+      },
+      {
+        "id": 15,
+        "question": "Câu 15",
+        "options": [
+          "A 一个",
+          "B 不吃",
+          "C 很多"
+        ],
+        "answer": "C"
+      }
     ],
-    workbook: [
-      { id: "wb-read-21-25", title: "Sách bài tập - Đọc Phần 2, Câu 21-25", source: "book", type: "fillChoice", choices: [
-        { key: "A", text: "就" }, { key: "B", text: "吧" }, { key: "C", text: "还" }, { key: "D", text: "对" }, { key: "E", text: "贵" }, { key: "F", text: "以后" }
-      ], questions: [
-        { id: "21", prompt: "王方，你去买一点儿水果（ ）。", answer: "B" },
-        { id: "22", prompt: "我下午四点考试，考试（ ）给你打电话。", answer: "F" },
-        { id: "23", prompt: "我有两本书，你喜欢（ ）送你一本。", answer: "A" },
-        { id: "24", prompt: "我太忙了，没时间运动，我知道运动（ ）身体很好。", answer: "D" },
-        { id: "25", prompt: "今天的菜（ ）可以，都是我丈夫做的。", answer: "C" }
-      ] },
-      { id: "wb-judge-26-30", title: "Sách bài tập - Đọc Phần 3, Câu 26-30", source: "book", type: "trueFalse", questions: [
-        { id: "26", original: "三百块钱还可以，你喜欢就买吧。", prompt: "她不喜欢这件衣服。", answer: "x", explain: "Sai, câu gốc khuyên nếu thích thì mua." },
-        { id: "27", original: "我们一起准备晚饭，你做鱼，我做菜。", prompt: "他们不去外面吃饭。", answer: "√", explain: "Đúng, họ chuẩn bị bữa tối ở nhà." },
-        { id: "28", original: "昨天的考试读和写不太好。", prompt: "他在想昨天的考试呢。", answer: "√", explain: "Đúng theo dữ liệu HSK2.md." },
-        { id: "29", original: "我中午有点儿累，喝了两杯咖啡。", prompt: "他累的时候喝咖啡。", answer: "√", explain: "Đúng, khi mệt người nói uống cà phê." },
-        { id: "30", original: "你少喝一点儿吧，喝多了对身体不好。", prompt: "他的身体不太好。", answer: "x", explain: "Sai, đây là lời khuyên chung, không khẳng định sức khỏe hiện tại." }
-      ] },
-      { id: "wb-match-31-35", title: "Sách bài tập - Đọc Phần 4, Câu 31-35", source: "book", type: "matchChoice", choices: [
-        { key: "A", text: "我今天早上六点起床的，现在有点儿累。" }, { key: "B", text: "你会做什么菜？" }, { key: "C", text: "明天我去公司，不去打球了。" }, { key: "D", text: "昨天的考试你觉得怎么样？" }, { key: "E", text: "他在哪儿呢？你看见 he 了吗？（例）" }, { key: "F", text: "你准备去北京旅游的东西了吗？" }
-      ], questions: [
-        { id: "31", prompt: "我会做鱼，你爱吃鱼吗？", answer: "B" },
-        { id: "32", prompt: "你休息一下吧。", answer: "A" },
-        { id: "33", prompt: "我觉得还不错。", answer: "D" },
-        { id: "34", prompt: "我们下个星期去，明天再准备吧。", answer: "F" },
-        { id: "35", prompt: "好吧，你明天回家以后给我打电话。", answer: "C" }
-      ] }
+    "readingPart1": [
+      {
+        "id": 16,
+        "text": "今天是爸爸的生日，我们就去外面吃饭吧。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "E"
+      },
+      {
+        "id": 17,
+        "text": "妈妈做了你最爱吃的菜。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "F"
+      },
+      {
+        "id": 18,
+        "text": "我有点儿累，休息一下。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "B"
+      },
+      {
+        "id": 19,
+        "text": "他这几天要准备考试，我没给他打电话。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "A"
+      },
+      {
+        "id": 20,
+        "text": "我不喝了，我已经喝了三杯了。",
+        "options": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "answer": "C"
+      }
     ],
-    workbookReference: [
-      { title: "Sách bài tập - Nghe Phần 1, Câu 1-5", source: "book", note: "HSK2.md chỉ có mô tả hình, không có script/audio/đáp án gốc nên chưa tự chấm.", lines: ["Hình 1: Người đàn ông ngồi làm việc bên bàn với máy tính.", "Hình 2: Hai người cùng đi bộ.", "Hình 3: Người phụ nữ cầm cốc uống trà/cà phê.", "Hình 4: Bé gái đang dùng thìa ăn uống.", "Hình 5: Tủ quần áo treo comple và áo sơ mi."] },
-      { title: "Sách bài tập - Nghe Phần 2, Câu 6-10", source: "book", note: "Thiếu script/audio/đáp án gốc.", lines: ["Hình A: Hai vợ chồng lớn tuổi đang trò chuyện.", "Hình B: Cặp nam nữ chuẩn bị nấu ăn.", "Hình C: Hai người đang đi dạo.", "Hình D: Cô bé đá bóng (ví dụ).", "Hình E: Đôi nam nữ nói chuyện ngoài trời.", "Hình F: Ba chiếc cốc nhỏ và bình nước/sữa."] },
-      { title: "Sách bài tập - Nghe Phần 3, Câu 11-15", source: "book", note: "Có lựa chọn nhưng thiếu script/audio/đáp án gốc.", lines: ["11. A 外面 | B 咖啡馆 | C 书店", "12. A 鱼 | B 都爱吃 | C 晚饭", "13. A 他儿子不喜欢 | B 椅子有点儿高 | C 一百块钱", "14. A 读和写还不错 | B 说和写还不错 | C 听和说还不错", "15. A 一个 | B 不吃 | C 很多"] },
-      { title: "Sách bài tập - Đọc Phần 1, Câu 16-20", source: "book", note: "Phần này phụ thuộc hình ảnh, project chưa có bộ hình gốc nên để tham khảo.", lines: ["16. 今天是爸爸的生日，我们就去外面吃饭吧。", "17. 妈妈做了你最爱吃的菜。", "18. 我有点儿累，休息一下。", "19. 他这几天要准备考试，我没给他打电话。", "20. 我不喝了，我已经喝了三杯了。"] }
+    "readingPart2": {
+      "options": [
+        {
+          "key": "A",
+          "word": "就"
+        },
+        {
+          "key": "B",
+          "word": "吧"
+        },
+        {
+          "key": "C",
+          "word": "还"
+        },
+        {
+          "key": "D",
+          "word": "对"
+        },
+        {
+          "key": "E",
+          "word": "贵"
+        },
+        {
+          "key": "F",
+          "word": "以后"
+        }
+      ],
+      "questions": [
+        {
+          "id": 21,
+          "text": "王方，你去买一点儿水果（ ）。",
+          "answer": "B"
+        },
+        {
+          "id": 22,
+          "text": "我下午四点考试，考试（ ）给你打电话。",
+          "answer": "F"
+        },
+        {
+          "id": 23,
+          "text": "我有两本书，你喜欢（ ）送你一本。",
+          "answer": "A"
+        },
+        {
+          "id": 24,
+          "text": "我太忙了，没时间运动，我知道运动（ ）身体很好。",
+          "answer": "D"
+        },
+        {
+          "id": 25,
+          "text": "今天的菜（ ）可以，都是我丈夫做的。",
+          "answer": "C"
+        }
+      ]
+    },
+    "readingPart3": [
+      {
+        "id": 26,
+        "text": "三百块钱还可以，你喜欢就买吧。",
+        "statement": "她不喜欢这件衣服。",
+        "answer": false,
+        "explanation": "Sai, câu gốc khuyên nếu thích thì mua."
+      },
+      {
+        "id": 27,
+        "text": "我们一起准备晚饭，你做鱼，我做菜。",
+        "statement": "他们不去外面吃饭。",
+        "answer": true,
+        "explanation": "Đúng, họ chuẩn bị bữa tối ở nhà."
+      },
+      {
+        "id": 28,
+        "text": "昨天的考试读和写不太好。",
+        "statement": "他在想昨天的考试呢。",
+        "answer": true,
+        "explanation": "Đúng theo dữ liệu HSK2.md."
+      },
+      {
+        "id": 29,
+        "text": "我中午有点儿累，喝了两杯咖啡。",
+        "statement": "他累的时候喝咖啡。",
+        "answer": true,
+        "explanation": "Đúng, khi mệt người nói uống cà phê."
+      },
+      {
+        "id": 30,
+        "text": "你少喝一点儿吧，喝多了对身体不好。",
+        "statement": "他的身体不太好。",
+        "answer": false,
+        "explanation": "Sai, đây là lời khuyên chung, không khẳng định sức khỏe hiện tại."
+      }
     ],
-    supplementalHomework: [
-      { type: "choice", prompt: "这儿的咖啡不错，怎么办？", options: ["就喝咖啡吧。", "他多高？", "我在教室。"], answer: "就喝咖啡吧。", explain: "Dùng 就 để đưa ra quyết định.", source: "ai" },
-      { type: "fill", prompt: "这件衣服（ ）大。", answer: "有点儿", explain: "有点儿 + tính từ.", source: "ai" },
-      { type: "translate", prompt: "Dịch sang tiếng Trung: Thi xong tôi gọi điện cho bạn.", answer: "考试以后给你打电话。", explain: "以后 nghĩa là sau khi/sau này.", source: "ai" }
+    "readingPart4": {
+      "options": [
+        {
+          "key": "A",
+          "text": "我今天早上六点起床的，现在有点儿累。"
+        },
+        {
+          "key": "B",
+          "text": "你会做什么菜？"
+        },
+        {
+          "key": "C",
+          "text": "明天我去公司，不去打球了。"
+        },
+        {
+          "key": "D",
+          "text": "昨天的考试你觉得怎么样？"
+        },
+        {
+          "key": "E",
+          "text": "他在哪儿呢？你看见 他 了吗？（例）"
+        },
+        {
+          "key": "F",
+          "text": "你准备去北京旅游的东西了吗？"
+        }
+      ],
+      "questions": [
+        {
+          "id": 31,
+          "text": "我会做鱼，你爱吃鱼吗？",
+          "answer": "B"
+        },
+        {
+          "id": 32,
+          "text": "你休息一下吧。",
+          "answer": "A"
+        },
+        {
+          "id": 33,
+          "text": "我觉得还不错。",
+          "answer": "D"
+        },
+        {
+          "id": 34,
+          "text": "我们下个星期去，明天再准备吧。",
+          "answer": "F"
+        },
+        {
+          "id": 35,
+          "text": "好吧，你明天回家以后给我打电话。",
+          "answer": "C"
+        }
+      ]
+    }
+  },
+  "migrationAudit": {
+    "migratedAt": "2026-08-24",
+    "officialAnswersSource": "HSK2 Đáp án sách bài tập.pdf",
+    "officialImagesSource": "HSK 2 Sách bài tập.pdf",
+    "verified": [
+      "lessonInfo",
+      "vocabulary list",
+      "grammar list",
+      "workbook official answers",
+      "workbook official images",
+      "workbook audio file exists"
     ],
-    listeningHomework: [
-      { id: "listen-ai-1", title: "Nghe chọn đáp án", source: "ai", script: "女：这儿的咖啡不错。\n男：就喝咖啡吧。", prompt: "他们喝什么？", options: ["咖啡", "鱼", "水"], answer: "咖啡", explain: "Script nói 就喝咖啡吧。" },
-      { id: "listen-ai-2", title: "Nghe đúng/sai", source: "ai", script: "我中午有点儿累，喝了两杯咖啡。", prompt: "他中午有点儿累。", options: ["√", "x"], answer: "√", explain: "Script nói 有点儿累。" },
-      { id: "listen-ai-3", title: "Nghe điền từ", source: "ai", script: "今天的菜还可以。", prompt: "今天的菜（ ）可以。", answer: "还", explain: "Từ cần điền là 还." },
-      { id: "listen-ai-4", title: "Nghe hội thoại và trả lời", source: "ai", script: "女：你下午做什么？\n男：我下午四点考试。", prompt: "男的下午几点考试？", options: ["四点", "六点", "十点"], answer: "四点", explain: "Script nói 下午四点考试。" }
-    ]
-  };
-  const index = window.HSK2_DATA.lessons.findIndex((item) => item.id === lesson.id);
-  if (index >= 0) window.HSK2_DATA.lessons[index] = lesson;
-})();
+    "needsVerification": [
+      "Từ vựng 意思: ví dụ cần kiểm chứng thêm"
+    ],
+    "oldAnswerDifferences": []
+  }
+};
+
+if (typeof window !== "undefined") {
+  window.lesson05Data = lesson05Data;
+}
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = lesson05Data;
+}

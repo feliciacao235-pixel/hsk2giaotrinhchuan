@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ôn tập HSK2 - NABI</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="container review-container">
+    <header class="lesson-header review-header">
+      <div class="nav-bar-top">
+        <a href="index.html" class="btn-back">⬅ Trang chủ</a>
+        <div class="lesson-top-progress-wrap">
+          <div class="progress-bar-container">
+            <div id="review-top-progress-bar" class="progress-bar" style="width: 0%;"></div>
+          </div>
+          <span id="review-top-progress-text" class="progress-text">Tổng: 0%</span>
+        </div>
+      </div>
+      <div class="lesson-title-banner">
+        <h1 id="review-title" class="lesson-title-zh">Đang tải ôn tập...</h1>
+        <p id="review-scope" class="lesson-title-vi">...</p>
+      </div>
+      <div class="lesson-learning-path review-tabs" id="review-tabs"></div>
+    </header>
+
+    <main class="tab-content review-content">
+      <section id="review-overview" class="tab-pane active"></section>
+      <section id="review-vocab" class="tab-pane"></section>
+      <section id="review-grammar" class="tab-pane"></section>
+      <section id="review-test" class="tab-pane"></section>
+      <section id="review-result" class="tab-pane"></section>
+    </main>
+  </div>
+
+  <script src="data/lesson-manifest.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/telegram.js"></script>
+  <script src="js/review.js"></script>
+</body>
+</html>

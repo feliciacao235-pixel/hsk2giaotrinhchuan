@@ -1,0 +1,16 @@
+# Local/runtime files
+.DS_Store
+Thumbs.db
+.netlify/
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Source/reference files that are too large or not needed for deployment
+*.zip
+*.pdf
+scratch/
+

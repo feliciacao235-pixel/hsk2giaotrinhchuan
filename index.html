@@ -1,71 +1,40 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Web App học HSK2 theo Giáo trình Chuẩn HSK2, data-driven, có luyện tập và nộp bài qua Telegram." />
-  <title>HSK2 NABI</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Khóa học Chuẩn HSK2 - NABI</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">汉</div>
+  <div class="container home-container">
+    <header class="home-header">
+      <div class="header-badge">HSK 2</div>
+      <h1>HỌC TIẾNG TRUNG MỖI NGÀY</h1>
+      <p>Ôn từ vựng, luyện ngữ pháp và làm bài tập theo Giáo trình Chuẩn HSK 2.</p>
+      <div class="home-progress-card">
         <div>
-          <strong>HSK2 NABI</strong>
-          <span>Giáo trình chuẩn HSK2</span>
+          <span class="home-progress-label">Tiến độ tổng</span>
+          <strong id="overall-progress-text">0%</strong>
+        </div>
+        <div class="progress-bar-container">
+          <div id="overall-progress-bar" class="progress-bar" style="width: 0%;"></div>
         </div>
       </div>
-      <nav id="lessonNav" class="lesson-nav" aria-label="Danh sách bài học"></nav>
-    </aside>
+    </header>
 
-    <main class="main">
-      <header class="topbar">
-        <button id="menuBtn" class="icon-btn mobile-only" type="button" aria-label="Mở danh sách bài">☰</button>
-        <div>
-          <p id="crumb" class="crumb">Bài 1</p>
-          <h1 id="lessonTitle">九月去北京旅游最好</h1>
-        </div>
-        <button id="shufflePracticeBtn" class="secondary-btn" type="button">Random luyện tập</button>
-      </header>
-
-      <section id="lockedNotice" class="notice hidden">
-        Bài này đang chờ bổ sung dữ liệu. Khi có file dữ liệu đúng template, giao diện sẽ dùng lại cấu trúc hiện tại.
-      </section>
-
-      <section id="lessonHero" class="lesson-hero"></section>
-
-      <div class="tabs" role="tablist" aria-label="Mục học">
-        <button class="tab active" data-tab="vocab" type="button">Từ mới</button>
-        <button class="tab" data-tab="grammar" type="button">Ngữ pháp</button>
-        <button class="tab" data-tab="practice" type="button">Luyện tập</button>
-        <button class="tab" data-tab="homework" type="button">Bài tập</button>
+    <main>
+      <div class="course-stage-header">
+        <h2>Giai đoạn 1: Bài 1 – Bài 8</h2>
       </div>
 
-      <section id="tabContent" class="tab-content"></section>
+      <div class="lesson-grid" id="lesson-grid"></div>
     </main>
   </div>
 
-  <div id="toast" class="toast hidden" role="status"></div>
-
-  <script src="data/lesson01.js"></script>
-  <script src="data/lesson02.js"></script>
-  <script src="data/lesson03.js"></script>
-  <script src="data/lesson04.js"></script>
-  <script src="data/lesson05.js"></script>
-  <script src="data/lesson06.js"></script>
-  <script src="data/lesson07.js"></script>
-  <script src="data/lesson08.js"></script>
-  <script src="data/lesson09.js"></script>
-  <script src="data/lesson10.js"></script>
-  <script src="data/lesson11.js"></script>
-  <script src="data/lesson12.js"></script>
-  <script src="data/lesson13.js"></script>
-  <script src="data/lesson14.js"></script>
-  <script src="data/lesson15.js"></script>
-  <script src="data/review01.js"></script>
-  <script src="data/review02.js"></script>
-  <script src="app.js"></script>
+  <script src="data/lesson-manifest.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bài học HSK2 - NABI</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="container lesson-container">
+    <header class="lesson-header">
+      <div class="nav-bar-top">
+        <a href="index.html" class="btn-back">⬅ Trang chủ</a>
+        <div class="lesson-top-progress-wrap">
+          <div class="progress-bar-container">
+            <div id="lesson-top-progress-bar" class="progress-bar" style="width: 0%;"></div>
+          </div>
+          <span id="lesson-top-progress-text" class="progress-text">Tiến độ: 0%</span>
+        </div>
+      </div>
+
+      <div class="lesson-title-banner">
+        <h1 id="lesson-title-zh" class="lesson-title-zh">Đang tải...</h1>
+        <p id="lesson-title-vi" class="lesson-title-vi">...</p>
+      </div>
+    </header>
+
+    <main class="tab-content">
+      <!-- 1. TỪ MỚI & FLASHCARD -->
+      <section id="vocab" class="tab-pane active">
+        <div class="card mb-20">
+          <div class="section-title-row">
+            <h2>🃏 Thẻ học Flashcard</h2>
+            <div id="fc-stats-bar" class="fc-stats-bar"></div>
+          </div>
+
+          <div class="fc-filter-tabs">
+            <button class="btn btn-sm fc-tab active" onclick="refreshFlashcardFilter('all')">Tất cả</button>
+            <button class="btn btn-sm fc-tab" onclick="refreshFlashcardFilter('forgot')">❌ Cần ôn</button>
+            <button class="btn btn-sm fc-tab" onclick="refreshFlashcardFilter('remembered')">✅ Đã nhớ</button>
+          </div>
+
+          <div class="flashcard-section">
+            <div class="flashcard-container">
+              <div class="flashcard">
+                <div class="flashcard-front">
+                  <span class="fc-side-label">Mặt trước</span>
+                  <span id="fc-hanzi" class="fc-hanzi">旅游</span>
+                  <span id="fc-front-pinyin" class="fc-pinyin">lǚyóu</span>
+                  <span class="fc-hint-tap"><small>👆 Nhấn để lật nghĩa</small></span>
+                </div>
+                <div class="flashcard-back">
+                  <span class="fc-side-label">Mặt sau</span>
+                  <span id="fc-back-hanzi" class="fc-hanzi">旅游</span>
+                  <span id="fc-pinyin" class="fc-pinyin">lǚyóu</span>
+                  <span id="fc-meaning" class="fc-meaning">Du lịch</span>
+                  <div class="fc-examples" id="fc-examples"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fc-controls">
+              <button id="btn-fc-prev" class="btn">⬅ Trước</button>
+              <button id="btn-fc-flip" class="btn btn-secondary">🔄 Lật thẻ</button>
+              <button id="btn-fc-next" class="btn">Tiếp ➡</button>
+            </div>
+
+            <div class="fc-status-controls">
+              <button id="btn-fc-forgot" class="btn btn-danger">❌ Chưa nhớ</button>
+              <button id="btn-fc-remembered" class="btn btn-success">✅ Đã nhớ</button>
+            </div>
+
+            <div class="fc-progress" id="fc-progress">Đang tải...</div>
+            <div class="activity-completion" id="fc-completion" hidden></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>📋 Danh sách từ mới (生词)</h2>
+          <p class="text-muted"><small>💡 Bấm vào biểu tượng 🔊 để nghe phát âm từng từ.</small></p>
+          <div class="vocab-table-container">
+            <table id="vocab-table">
+              <thead>
+                <tr>
+                  <th>Chữ Hán</th>
+                  <th>Phiên âm</th>
+                  <th>Từ loại</th>
+                  <th>Nghĩa tiếng Việt & Ví dụ</th>
+                  <th class="text-center">Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. NGỮ PHÁP -->
+      <section id="grammar" class="tab-pane">
+        <div class="section-title-row mb-15">
+          <h2>📐 Ngữ pháp trọng tâm (语法)</h2>
+        </div>
+        <div id="grammar-list"></div>
+      </section>
+
+      <!-- 3. LUYỆN TẬP TƯƠNG TÁC (GAMES) -->
+      <section id="practice" class="tab-pane">
+        <div id="practice-container"></div>
+      </section>
+
+      <!-- 4. BÀI TẬP CHÍNH (WORKBOOK) -->
+      <section id="exercises" class="tab-pane">
+        <div id="user-info-form" class="card">
+          <div class="exam-start-banner">
+            <h3 id="exam-lesson-title">📝 Sách bài tập HSK2</h3>
+            <p>Học viên vui lòng nhập họ và tên trước khi bắt đầu làm bài. Kết quả sẽ được tự động chấm điểm và lưu lại.</p>
+            <div class="name-input-row">
+              <input type="text" id="student-name" placeholder="Nhập họ và tên của bạn..." class="input-text">
+              <button id="btn-start-exam" class="btn btn-primary btn-large">Bắt đầu làm bài 🚀</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="exam-area" style="display: none;">
+          <form id="exam-form">
+            <!-- Listening Section -->
+            <div class="exam-part-header">
+              <h3>🎧 I. PHẦN NGHE (听力)</h3>
+            </div>
+
+            <div id="listening-part1" class="exam-section card">
+              <div class="section-badge">Phần 1</div>
+              <h4>Nghe câu và phán đoán nội dung có khớp với hình ảnh hay không (Câu 1 - 5)</h4>
+              <div class="question-list"></div>
+            </div>
+
+            <div id="listening-part2" class="exam-section card">
+              <div class="section-badge">Phần 2</div>
+              <h4>Nghe các mẩu đối thoại và chọn hình ảnh phù hợp (Câu 6 - 10)</h4>
+              <div class="question-list"></div>
+            </div>
+            
+            <div id="listening-part3" class="exam-section card">
+              <div class="section-badge">Phần 3</div>
+              <h4>Nghe các mẩu đối thoại và chọn đáp án đúng nhất (Câu 11 - 15)</h4>
+              <div class="question-list"></div>
+            </div>
+
+            <!-- Reading Section -->
+            <div class="exam-part-header">
+              <h3>📖 II. PHẦN ĐỌC (阅读)</h3>
+            </div>
+
+            <div id="reading-part1" class="exam-section card">
+              <div class="section-badge">Phần 1</div>
+              <h4>Chọn hình ảnh phù hợp với nội dung câu (Câu 16 - 20)</h4>
+              <div class="question-list"></div>
+            </div>
+
+            <div id="reading-part2" class="exam-section card">
+              <div class="section-badge">Phần 2</div>
+              <h4>Điền từ thích hợp vào chỗ trống (Câu 21 - 25)</h4>
+              <div class="options-box" id="reading-p2-options"></div>
+              <div class="question-list"></div>
+            </div>
+
+            <div id="reading-part3" class="exam-section card">
+              <div class="section-badge">Phần 3</div>
+              <h4>Phán đoán câu là Đúng (√) hay Sai (x) so với câu gốc (Câu 26 - 30)</h4>
+              <div class="question-list"></div>
+            </div>
+
+            <div id="reading-part4" class="exam-section card">
+              <div class="section-badge">Phần 4</div>
+              <h4>Chọn câu hỏi hoặc câu trả lời tương ứng để hoàn thành đối thoại (Câu 31 - 35)</h4>
+              <div class="options-box" id="reading-p4-options"></div>
+              <div class="question-list"></div>
+            </div>
+
+            <button type="submit" id="btn-submit-exam" class="btn btn-primary btn-large btn-submit-master">
+              📤 NỘP BÀI TẬP VÀ CHẤM ĐIỂM
+            </button>
+          </form>
+        </div>
+        
+        <!-- Kết quả sau khi nộp -->
+        <div id="exam-result" class="card" style="display: none;">
+          <div id="score-display"></div>
+          <div id="wrong-answers"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="data/lesson-manifest.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/telegram.js"></script>
+  <script src="js/vocabulary.js"></script>
+  <script src="js/grammar.js"></script>
+  <script src="js/vocab-games.js"></script>
+  <script src="js/exercises.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
