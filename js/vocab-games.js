@@ -24,6 +24,37 @@ function renderGameSelector(gameData, lessonId) {
   const fillCount = (gameData.quizQuestions || []).filter((q) => q.type === "fill-blank").length;
   const scrambleCount = (gameData.quizQuestions || []).filter((q) => q.type === "sentence-scramble").length;
   const totalChallenge = (gameData.quizQuestions || []).length;
+  const modeCards = [
+    {
+      mode: "quiz",
+      icon: "🎯",
+      title: "Nhớ từ",
+      desc: `${quizCount} câu · Hán tự ↔ Nghĩa ↔ Pinyin`,
+      count: quizCount
+    },
+    {
+      mode: "matching",
+      icon: "🔗",
+      title: "Ghép từ",
+      desc: `${matchingCount} cặp · Hán tự | Nghĩa tiếng Việt`,
+      count: matchingCount
+    },
+    {
+      mode: "fill",
+      icon: "✏️",
+      title: "Điền từ vào câu",
+      desc: `${fillCount} câu · Chọn từ đúng vào chỗ trống`,
+      count: fillCount
+    },
+    {
+      mode: "scramble",
+      icon: "🧩",
+      title: "Sắp xếp câu",
+      desc: `${scrambleCount} câu · Luyện trật tự câu`,
+      count: scrambleCount
+    }
+  ];
+  const availableModeCards = modeCards.filter((card) => card.count > 0);
 
   container.innerHTML = `
     <div class="practice-intro card">
@@ -31,37 +62,32 @@ function renderGameSelector(gameData, lessonId) {
       <h3>Luyện tập</h3>
       <p>Bạn muốn luyện gì trước? Chọn một hoạt động ngắn để củng cố Bài ${lessonId}.</p>
 
-      <button class="quick-challenge-card" data-mode="all" type="button">
-        <span>⚡</span>
-        <strong>Thử thách Bài ${lessonId}</strong>
-        <small>Từ vựng + ngữ pháp · ${totalChallenge} câu</small>
-        <em>BẮT ĐẦU →</em>
-      </button>
+      ${
+        totalChallenge > 0
+          ? `<button class="quick-challenge-card" data-mode="all" type="button">
+              <span>⚡</span>
+              <strong>Thử thách Bài ${lessonId}</strong>
+              <small>Từ vựng + ngữ pháp · ${totalChallenge} câu</small>
+              <em>BẮT ĐẦU →</em>
+            </button>`
+          : `<div class="alert alert-warning">
+              <strong>Chưa có câu luyện nhanh cho bài này.</strong>
+              <p>Giáo viên cần bổ sung <code>vocabularyGames.quizQuestions</code> trong file dữ liệu bài học.</p>
+            </div>`
+      }
       
       <div class="game-mode-grid">
-        <button class="game-card-btn" data-mode="quiz">
-          <span class="game-icon">🎯</span>
-          <span class="game-title">Nhớ từ</span>
-          <span class="game-desc">${quizCount} câu · Hán tự ↔ Nghĩa ↔ Pinyin</span>
-        </button>
-
-        <button class="game-card-btn" data-mode="matching">
-          <span class="game-icon">🔗</span>
-          <span class="game-title">Ghép từ</span>
-          <span class="game-desc">${matchingCount} cặp · Hán tự | Nghĩa tiếng Việt</span>
-        </button>
-
-        <button class="game-card-btn" data-mode="fill">
-          <span class="game-icon">✏️</span>
-          <span class="game-title">Điền từ vào câu</span>
-          <span class="game-desc">${fillCount} câu · Chọn từ đúng vào chỗ trống</span>
-        </button>
-
-        <button class="game-card-btn" data-mode="scramble">
-          <span class="game-icon">🧩</span>
-          <span class="game-title">Sắp xếp câu</span>
-          <span class="game-desc">${scrambleCount} câu · Luyện trật tự câu</span>
-        </button>
+        ${availableModeCards
+          .map(
+            (card) => `
+              <button class="game-card-btn" data-mode="${card.mode}" type="button">
+                <span class="game-icon">${card.icon}</span>
+                <span class="game-title">${card.title}</span>
+                <span class="game-desc">${card.desc}</span>
+              </button>
+            `
+          )
+          .join("")}
       </div>
     </div>
 
@@ -301,6 +327,20 @@ function startQuizMode(mode, gameData, lessonId) {
   const totalQuestions = questions.length;
   const gameArea = document.getElementById("active-game-area");
 
+  if (totalQuestions === 0) {
+    gameArea.innerHTML = `
+      <div class="card game-wrapper text-center p-30">
+        <h3>Chưa có câu luyện cho dạng này</h3>
+        <p class="text-muted">Bài ${lessonId} hiện chưa có dữ liệu phù hợp với dạng luyện tập bạn vừa chọn.</p>
+        <button class="btn btn-primary mt-15" id="btn-return-menu-empty">Trở về menu luyện tập</button>
+      </div>
+    `;
+    gameArea.querySelector("#btn-return-menu-empty").addEventListener("click", () => {
+      renderGameSelector(gameData, lessonId);
+    });
+    return;
+  }
+
   function renderCurrentQuestion() {
     if (currentIndex >= totalQuestions) {
       renderGameResult();
@@ -530,7 +570,7 @@ function startQuizMode(mode, gameData, lessonId) {
   }
 
   function renderGameResult() {
-    const scorePct = Math.round((correctCount / totalQuestions) * 100);
+    const scorePct = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
     let title = "Hoàn thành bài luyện tập!";
     let emoji = "🎉";
     if (scorePct >= 80) {
