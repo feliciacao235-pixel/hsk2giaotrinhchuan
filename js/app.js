@@ -272,6 +272,118 @@ function isNewLessonSchema(data) {
   );
 }
 
+function buildPracticeGamesForLesson(data) {
+  const games = data.vocabularyGames || {};
+  const quizQuestions = Array.isArray(games.quizQuestions) ? [...games.quizQuestions] : [];
+  const matchingPairs = Array.isArray(games.matchingPairs) ? games.matchingPairs : [];
+  const vocabulary = Array.isArray(data.vocabulary) ? data.vocabulary : [];
+  const existingTypes = new Set(quizQuestions.map((q) => q.type));
+
+  if (!existingTypes.has("fill-blank")) {
+    quizQuestions.push(...generateFillBlankPractice(vocabulary, quizQuestions.length));
+  }
+
+  if (!existingTypes.has("sentence-scramble")) {
+    quizQuestions.push(...generateSentenceScramblePractice(vocabulary, quizQuestions.length));
+  }
+
+  return {
+    ...games,
+    quizQuestions,
+    matchingPairs
+  };
+}
+
+function generateFillBlankPractice(vocabulary, startIndex = 0) {
+  const usableWords = vocabulary.filter((word) => word.hanzi && word.exampleZH && word.exampleZH.includes(word.hanzi));
+
+  return usableWords.slice(0, 3).map((word, index) => ({
+    id: `auto-fill-${startIndex + index + 1}`,
+    type: "fill-blank",
+    prompt: word.exampleZH.replace(word.hanzi, "（ ）"),
+    options: buildPracticeOptions(word.hanzi, vocabulary, index),
+    answer: word.hanzi,
+    translation: word.exampleVI || word.meaning || "",
+    sourceStatus: "AI_SUPPLEMENT_FROM_VERIFIED_VOCAB"
+  }));
+}
+
+function generateSentenceScramblePractice(vocabulary, startIndex = 0) {
+  const knownWords = buildKnownChineseWordList(vocabulary);
+  const usableWords = vocabulary.filter((word) => cleanChineseSentence(word.exampleZH).length >= 4);
+
+  return usableWords.slice(0, 3).map((word, index) => {
+    const answer = cleanChineseSentence(word.exampleZH);
+    return {
+      id: `auto-scramble-${startIndex + index + 1}`,
+      type: "sentence-scramble",
+      prompt: "Sắp xếp từ thành câu hoàn chỉnh:",
+      words: segmentChineseSentence(answer, knownWords),
+      answer,
+      translation: word.exampleVI || "",
+      sourceStatus: "AI_SUPPLEMENT_FROM_VERIFIED_VOCAB"
+    };
+  });
+}
+
+function buildPracticeOptions(answer, vocabulary, seed = 0) {
+  const pool = vocabulary.map((word) => word.hanzi).filter((hanzi) => hanzi && hanzi !== answer);
+  const options = [answer];
+  let cursor = seed;
+
+  while (options.length < 4 && pool.length) {
+    const candidate = pool[cursor % pool.length];
+    if (!options.includes(candidate)) options.push(candidate);
+    cursor++;
+  }
+
+  return rotateArray(options, seed + 1);
+}
+
+function rotateArray(items, offset) {
+  if (!items.length) return items;
+  const safeOffset = offset % items.length;
+  return [...items.slice(safeOffset), ...items.slice(0, safeOffset)];
+}
+
+function cleanChineseSentence(sentence = "") {
+  return sentence.replace(/[。！？?，,、；;：:\s]/g, "");
+}
+
+function buildKnownChineseWordList(vocabulary) {
+  const commonWords = [
+    "因为", "所以", "虽然", "但是", "快要", "就要", "不要", "没有", "正在", "可能",
+    "右边", "前边", "去年", "新年", "火车站", "男孩子", "女孩子", "服务员", "公共汽车",
+    "那个", "这个", "一个", "两个", "三个", "三岁", "六岁", "朋友们", "同学们",
+    "弟弟", "妹妹", "哥哥", "姐姐", "大家", "我们", "他们", "你们", "我", "你", "他", "她",
+    "写字", "说话", "唱歌", "跳舞", "上班", "穿", "拿", "笑", "找", "等", "告诉",
+    "喜欢", "觉得", "知道", "认识", "希望", "欢迎", "帮助", "洗", "玩儿",
+    "比", "大", "小", "高", "近", "远", "慢", "快", "贵", "便宜", "会", "是", "在", "有",
+    "去", "来", "买", "吃", "看", "听", "说", "做", "的人", "的", "了", "吗", "呢",
+    "不", "没", "很", "太", "更", "都", "要", "着", "过", "得", "往", "从", "到", "离", "对", "让", "再", "别"
+  ];
+  const lessonWords = vocabulary.map((word) => word.hanzi).filter(Boolean);
+  return [...new Set([...lessonWords, ...commonWords])].sort((a, b) => b.length - a.length);
+}
+
+function segmentChineseSentence(sentence, knownWords) {
+  const result = [];
+  let rest = sentence;
+
+  while (rest.length) {
+    const match = knownWords.find((word) => rest.startsWith(word));
+    if (match) {
+      result.push(match);
+      rest = rest.slice(match.length);
+    } else {
+      result.push(rest[0]);
+      rest = rest.slice(1);
+    }
+  }
+
+  return result.length > 1 ? result : sentence.split("");
+}
+
 function showLessonUnavailable(lessonId, lessonMeta) {
   document.querySelector(".lesson-container").innerHTML = `
     <div class="card text-center p-30">
@@ -305,7 +417,7 @@ function loadLesson(data) {
 
   // 3. Practice Games
   if (window.initPracticeGames && data.vocabularyGames) {
-    window.initPracticeGames(data.vocabularyGames, data.lessonInfo.id);
+    window.initPracticeGames(buildPracticeGamesForLesson(data), data.lessonInfo.id);
   }
 
   // 4. Exercises & Workbook
