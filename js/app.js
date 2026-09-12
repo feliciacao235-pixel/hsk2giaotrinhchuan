@@ -22,11 +22,11 @@ function initHomePage() {
 }
 
 async function initLessonPage() {
+  document.body.classList.add("lesson-page");
   const urlParams = new URLSearchParams(window.location.search);
   const lessonId = parseInt(urlParams.get("id") || "1", 10);
   const lessonMeta = getLessonMeta(lessonId);
   ensureLessonStickyShell();
-  initCompactLessonHeader();
 
   if (!lessonMeta || lessonMeta.status !== "ready") {
     showLessonUnavailable(lessonId, lessonMeta);
@@ -454,27 +454,6 @@ function ensureLessonStickyShell() {
     compactTitle.textContent = "Bài học";
     back.insertAdjacentElement("afterend", compactTitle);
   }
-}
-
-function initCompactLessonHeader() {
-  let compact = false;
-  let ticking = false;
-
-  const update = () => {
-    ticking = false;
-    const nextCompact = compact ? window.scrollY >= 36 : window.scrollY > 120;
-    if (nextCompact === compact) return;
-
-    compact = nextCompact;
-    document.body.classList.toggle("lesson-header-compact", compact);
-  };
-
-  update();
-  window.addEventListener("scroll", () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(update);
-  }, { passive: true });
 }
 
 function activateLessonTab(lessonId, tabId) {
