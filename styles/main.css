@@ -2976,10 +2976,8 @@ tr:nth-child(even) td {
   margin: -1px 0 18px;
   padding-top: max(8px, env(safe-area-inset-top));
   background: rgb(245 235 221 / 0.96);
-  backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
   transition:
-    padding 180ms ease,
     box-shadow 180ms ease,
     border-color 180ms ease;
 }
@@ -3017,13 +3015,7 @@ tr:nth-child(even) td {
 .lesson-sticky-shell .lesson-section-summary p,
 .lesson-sticky-shell .lesson-section-progress,
 .lesson-sticky-shell .eyebrow-zh {
-  transition:
-    height 180ms ease,
-    padding 180ms ease,
-    margin 180ms ease,
-    transform 180ms ease,
-    opacity 180ms ease,
-    max-height 180ms ease;
+  transition: opacity 120ms ease;
 }
 
 body.lesson-header-compact .lesson-sticky-shell {
@@ -3040,7 +3032,6 @@ body.lesson-header-compact .lesson-title-banner {
   border-width: 0;
   opacity: 0;
   overflow: hidden;
-  transform: translateY(-4px);
 }
 
 body.lesson-header-compact .nav-bar-top {

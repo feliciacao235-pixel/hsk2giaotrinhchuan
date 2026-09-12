@@ -277,14 +277,17 @@ function buildPracticeGamesForLesson(data) {
   const quizQuestions = Array.isArray(games.quizQuestions) ? [...games.quizQuestions] : [];
   const matchingPairs = Array.isArray(games.matchingPairs) ? games.matchingPairs : [];
   const vocabulary = Array.isArray(data.vocabulary) ? data.vocabulary : [];
-  const existingTypes = new Set(quizQuestions.map((q) => q.type));
+  const fillCount = quizQuestions.filter((q) => q.type === "fill-blank").length;
+  const scrambleCount = quizQuestions.filter((q) => q.type === "sentence-scramble").length;
 
-  if (!existingTypes.has("fill-blank")) {
-    quizQuestions.push(...generateFillBlankPractice(vocabulary, quizQuestions.length));
+  if (fillCount < 3) {
+    const usedAnswers = new Set(quizQuestions.filter((q) => q.type === "fill-blank").map((q) => q.answer));
+    quizQuestions.push(...generateFillBlankPractice(vocabulary, quizQuestions.length, 3 - fillCount, usedAnswers));
   }
 
-  if (!existingTypes.has("sentence-scramble")) {
-    quizQuestions.push(...generateSentenceScramblePractice(vocabulary, quizQuestions.length));
+  if (scrambleCount < 3) {
+    const usedAnswers = new Set(quizQuestions.filter((q) => q.type === "sentence-scramble").map((q) => q.answer));
+    quizQuestions.push(...generateSentenceScramblePractice(vocabulary, quizQuestions.length, 3 - scrambleCount, usedAnswers));
   }
 
   return {
@@ -294,10 +297,12 @@ function buildPracticeGamesForLesson(data) {
   };
 }
 
-function generateFillBlankPractice(vocabulary, startIndex = 0) {
-  const usableWords = vocabulary.filter((word) => word.hanzi && word.exampleZH && word.exampleZH.includes(word.hanzi));
+function generateFillBlankPractice(vocabulary, startIndex = 0, limit = 3, usedAnswers = new Set()) {
+  const usableWords = vocabulary.filter(
+    (word) => word.hanzi && !usedAnswers.has(word.hanzi) && word.exampleZH && word.exampleZH.includes(word.hanzi)
+  );
 
-  return usableWords.slice(0, 3).map((word, index) => ({
+  return usableWords.slice(0, limit).map((word, index) => ({
     id: `auto-fill-${startIndex + index + 1}`,
     type: "fill-blank",
     prompt: word.exampleZH.replace(word.hanzi, "（ ）"),
@@ -308,11 +313,14 @@ function generateFillBlankPractice(vocabulary, startIndex = 0) {
   }));
 }
 
-function generateSentenceScramblePractice(vocabulary, startIndex = 0) {
+function generateSentenceScramblePractice(vocabulary, startIndex = 0, limit = 3, usedAnswers = new Set()) {
   const knownWords = buildKnownChineseWordList(vocabulary);
-  const usableWords = vocabulary.filter((word) => cleanChineseSentence(word.exampleZH).length >= 4);
+  const usableWords = vocabulary.filter((word) => {
+    const answer = cleanChineseSentence(word.exampleZH);
+    return answer.length >= 4 && !usedAnswers.has(answer);
+  });
 
-  return usableWords.slice(0, 3).map((word, index) => {
+  return usableWords.slice(0, limit).map((word, index) => {
     const answer = cleanChineseSentence(word.exampleZH);
     return {
       id: `auto-scramble-${startIndex + index + 1}`,
@@ -450,14 +458,23 @@ function ensureLessonStickyShell() {
 
 function initCompactLessonHeader() {
   let compact = false;
+  let ticking = false;
+
   const update = () => {
-    if (!compact && window.scrollY > 120) compact = true;
-    if (compact && window.scrollY < 36) compact = false;
+    ticking = false;
+    const nextCompact = compact ? window.scrollY >= 36 : window.scrollY > 120;
+    if (nextCompact === compact) return;
+
+    compact = nextCompact;
     document.body.classList.toggle("lesson-header-compact", compact);
   };
 
   update();
-  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }, { passive: true });
 }
 
 function activateLessonTab(lessonId, tabId) {
